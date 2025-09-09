@@ -1,4 +1,14 @@
 import JSZip from 'jszip'
+import type { Article } from './markdown'
+
+export type ThemeTokens = {
+  bg: string
+  fg: string
+  sub: string
+  primary: string
+  card: string
+  border: string
+}
 
 type BasicInfo = {
   title: string
@@ -15,17 +25,17 @@ export function buildBlogZip({ html, assets }: { html: string; assets: Array<{ p
   return zip
 }
 
-export function generateHtmlByTemplate(info: Partial<BasicInfo>, templateId: string) {
+export function generateHtmlByTemplate(info: Partial<BasicInfo>, templateId: string, opts?: { articles?: Article[]; themeOverride?: Partial<ThemeTokens> }) {
   const theme = pickTheme(templateId)
   const title = info.title || '我的新博客'
   const author = info.author || '作者'
   const tagline = info.tagline || ''
   const about = info.about || ''
 
-  return baseHtml({ title, author, tagline, about, theme })
+  return baseHtml({ title, author, tagline, about, theme, articles: opts?.articles, themeOverride: opts?.themeOverride })
 }
 
-export function generateHtmlAuto(prompt: string) {
+export function generateHtmlAuto(prompt: string, opts?: { articles?: Article[]; themeOverride?: Partial<ThemeTokens> }) {
   const lower = prompt.toLowerCase()
   const isDark = /(深色|暗色|dark)/.test(prompt)
   const theme = isDark ? 'dark' : /(白|light|简洁|极简)/.test(prompt) ? 'clean' : 'magazine'
@@ -35,7 +45,7 @@ export function generateHtmlAuto(prompt: string) {
   const title = titleMatch ? titleMatch[3] : '我的新博客'
   const about = prompt
 
-  return baseHtml({ title, author, tagline: '', about, theme })
+  return baseHtml({ title, author, tagline: '', about, theme, articles: opts?.articles, themeOverride: opts?.themeOverride })
 }
 
 function pickTheme(id: string) {
@@ -44,27 +54,32 @@ function pickTheme(id: string) {
   return 'clean'
 }
 
-function baseHtml({ title, author, tagline, about, theme }: { title: string; author: string; tagline: string; about: string; theme: 'clean' | 'dark' | 'magazine' }) {
-  const palette = theme === 'dark' ? {
+function baseHtml({ title, author, tagline, about, theme, articles, themeOverride }: { title: string; author: string; tagline: string; about: string; theme: 'clean' | 'dark' | 'magazine'; articles?: Article[]; themeOverride?: Partial<ThemeTokens> }) {
+  const paletteDefault = theme === 'dark' ? {
     bg: '#000', fg: '#fff', sub: '#8E8E93', primary: '#007AFF', card: '#111', border: '#1f1f1f'
   } : theme === 'magazine' ? {
     bg: '#fafafa', fg: '#000', sub: '#8E8E93', primary: '#007AFF', card: '#fff', border: '#eaeaea'
   } : {
     bg: '#fff', fg: '#000', sub: '#8E8E93', primary: '#007AFF', card: '#fff', border: '#f0f0f0'
   }
+  const palette = { ...paletteDefault, ...(themeOverride || {}) }
 
-  const articles = [
-    { title: '第一篇：开篇词', excerpt: '记录我的学习与成长路径。' },
-    { title: '第二篇：组件化思维', excerpt: '谈谈前端组件设计与复用。' },
-    { title: '第三篇：AI辅助开发实践', excerpt: '用AI提升效率的几个小技巧。' }
+  const defaultArticles = [
+    { title: '第一篇：开篇词', excerpt: '记录我的学习与成长路径。', slug: 'post-1', html: '' },
+    { title: '第二篇：组件化思维', excerpt: '谈谈前端组件设计与复用。', slug: 'post-2', html: '' },
+    { title: '第三篇：AI辅助开发实践', excerpt: '用AI提升效率的几个小技巧。', slug: 'post-3', html: '' }
   ]
 
-  const list = articles.map(a => `
-    <a class="post" href="#">
+  const listData = (articles && articles.length > 0 ? articles.map(a => ({ title: a.title, excerpt: a.excerpt || '', slug: a.slug })) : defaultArticles)
+
+  const list = listData.map(a => `
+    <a class="post" href="#${a.slug}">
       <h3>${a.title}</h3>
-      <p>${a.excerpt}</p>
+      <p>${a.excerpt || ''}</p>
     </a>
   `).join('')
+
+  const firstArticleSection = (articles && articles.length > 0) ? `<section class="article" id="${articles[0]?.slug || 'article'}">${articles[0]?.html || ''}</section>` : ''
 
   return `<!doctype html>
   <html lang="zh-CN">
@@ -89,6 +104,8 @@ function baseHtml({ title, author, tagline, about, theme }: { title: string; aut
       .about { background: var(--card); border: 1px solid var(--border); padding: 16px; border-radius: 10px; margin-top: 24px; }
       footer { text-align: center; color: var(--sub); padding: 24px; }
       .button { display:inline-block; background: var(--primary); color:#fff; padding: 10px 14px; border-radius: 8px; margin-top: 16px; }
+      .article { background: var(--card); border: 1px solid var(--border); padding: 16px; border-radius: 10px; margin-top: 24px; }
+      .article h1, .article h2, .article h3 { margin-top: 1.4em; }
     </style>
   </head>
   <body>
@@ -106,6 +123,7 @@ function baseHtml({ title, author, tagline, about, theme }: { title: string; aut
           <p style="white-space:pre-wrap; line-height:1.8;">${about}</p>
           <a class="button" href="#">联系我</a>
         </section>
+        ${firstArticleSection}
       </div>
     </main>
     <footer>Powered by Blog Builder</footer>

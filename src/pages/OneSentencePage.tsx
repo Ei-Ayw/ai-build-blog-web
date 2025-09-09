@@ -1,21 +1,25 @@
 import React, { useMemo, useState } from 'react'
-import { Card, Button, Typography, Form, Input, Space, message } from 'antd'
+import { Card, Button, Typography, Form, Input, Space, message, Upload, Divider } from 'antd'
 import { ThunderboltOutlined } from '@ant-design/icons'
 import { buildBlogZip, generateHtmlAuto } from '../utils/generator'
+import { parseMarkdownFiles, type Article } from '../utils/markdown'
+import ThemePanel, { type ThemeTokens } from '../components/ThemePanel'
 
 export default function OneSentencePage() {
   const [form] = Form.useForm()
   const [preview, setPreview] = useState('')
+  const [articles, setArticles] = useState<Article[]>([])
+  const [theme, setTheme] = useState<Partial<ThemeTokens> | undefined>()
 
   const onPreview = async () => {
     const values = await form.validateFields()
-    const html = generateHtmlAuto(values.prompt)
+    const html = generateHtmlAuto(values.prompt, { articles, themeOverride: theme })
     setPreview(html)
   }
 
   const onGenerate = async () => {
     const values = await form.validateFields()
-    const html = generateHtmlAuto(values.prompt)
+    const html = generateHtmlAuto(values.prompt, { articles, themeOverride: theme })
     const zip = await buildBlogZip({ html, assets: [] })
     await zip.generateAsync({ type: 'blob' }).then(async (blob) => {
       const { saveAs } = await import('file-saver')
@@ -24,7 +28,7 @@ export default function OneSentencePage() {
     message.success('博客ZIP已生成并下载')
   }
 
-  const previewDoc = useMemo(() => preview || generateHtmlAuto('一个极简的技术博客，作者Ann，主题深色，简介记录AI与Web开发'), [preview])
+  const previewDoc = useMemo(() => preview || generateHtmlAuto('一个极简的技术博客，作者Ann，主题深色，简介记录AI与Web开发', { articles, themeOverride: theme }), [preview, articles, theme])
 
   return (
     <Space direction="vertical" size={16} style={{ display: 'flex' }}>
@@ -56,6 +60,32 @@ export default function OneSentencePage() {
         <div style={{ border: '1px solid #eee', height: 640 }}>
           <iframe title="preview-auto" srcDoc={previewDoc} style={{ width: '100%', height: '100%', border: 0 }} />
         </div>
+      </Card>
+
+      <Card>
+        <Typography.Title level={5} style={{ marginTop: 0 }}>文章导入（Markdown）</Typography.Title>
+        <Upload.Dragger
+          multiple
+          maxCount={20}
+          accept=".md,.markdown,text/markdown"
+          beforeUpload={async (file) => {
+            const parsed = await parseMarkdownFiles([file])
+            setArticles((prev) => [...prev, ...parsed])
+            message.success(`${file.name} 已解析`)
+            return false
+          }}
+          showUploadList={{ showRemoveIcon: true, showPreviewIcon: false }}
+          onRemove={(file) => {
+            const name = file.name.replace(/\.(md|markdown)$/i, '')
+            setArticles((prev) => prev.filter(a => a.title !== name))
+          }}
+        >
+          <p>将 Markdown 文件拖拽到此处或点击上传</p>
+        </Upload.Dragger>
+
+        <Divider style={{ margin: '16px 0' }} />
+        <Typography.Title level={5} style={{ marginTop: 0 }}>主题自定义</Typography.Title>
+        <ThemePanel value={theme as ThemeTokens} onChange={setTheme} />
       </Card>
     </Space>
   )

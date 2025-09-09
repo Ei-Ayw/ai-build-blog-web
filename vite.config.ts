@@ -4,6 +4,8 @@ import path from 'node:path';
 
 export default defineConfig({
   plugins: [react()],
+  // GitHub Pages 项目页需要以仓库名作为 base
+  base: '/ai-build-blog-web/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src')

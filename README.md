@@ -74,4 +74,3 @@ blog-build/
 
 MIT
 
-# ai-build-blog-web

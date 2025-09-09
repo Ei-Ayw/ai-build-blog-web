@@ -1,7 +1,9 @@
 import React, { useMemo, useState } from 'react'
-import { Card, Col, Row, Button, Modal, Form, Input, message, Space, Typography, Tag } from 'antd'
+import { Card, Col, Row, Button, Modal, Form, Input, message, Space, Typography, Tag, Upload, Divider } from 'antd'
 import { EyeOutlined, ThunderboltOutlined } from '@ant-design/icons'
 import { buildBlogZip, generateHtmlByTemplate } from '../utils/generator'
+import { parseMarkdownFiles, type Article } from '../utils/markdown'
+import ThemePanel, { type ThemeTokens } from '../components/ThemePanel'
 
 type TemplateMeta = {
   id: string
@@ -20,6 +22,8 @@ export default function TemplatesPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const [currentTemplate, setCurrentTemplate] = useState<TemplateMeta | null>(null)
   const [form] = Form.useForm()
+  const [articles, setArticles] = useState<Article[]>([])
+  const [theme, setTheme] = useState<Partial<ThemeTokens> | undefined>()
 
   const previewUrl = useMemo(() => {
     return currentTemplate ? `/preview/${currentTemplate.id}` : ''
@@ -28,7 +32,7 @@ export default function TemplatesPage() {
   const onGenerate = async () => {
     try {
       const values = await form.validateFields()
-      const html = generateHtmlByTemplate(values, currentTemplate?.id || 'clean')
+      const html = generateHtmlByTemplate(values, currentTemplate?.id || 'clean', { articles, themeOverride: theme })
       const zip = await buildBlogZip({
         html,
         assets: []
@@ -78,7 +82,7 @@ export default function TemplatesPage() {
         <Row gutter={16}>
           <Col span={14}>
             <div style={{ border: '1px solid #eee', height: 520 }}>
-              <iframe title="preview" srcDoc={generateHtmlByTemplate({ title: '预览', author: '你', tagline: 'Hello' }, currentTemplate?.id || 'clean')} style={{ width: '100%', height: '100%', border: 0 }} />
+              <iframe title="preview" srcDoc={generateHtmlByTemplate({ title: '预览', author: '你', tagline: 'Hello' }, currentTemplate?.id || 'clean', { articles, themeOverride: theme })} style={{ width: '100%', height: '100%', border: 0 }} />
             </div>
           </Col>
           <Col span={10}>
@@ -97,6 +101,31 @@ export default function TemplatesPage() {
                 <Input.TextArea rows={6} maxLength={500} placeholder="简介、擅长领域、社交链接等" />
               </Form.Item>
             </Form>
+
+            <Divider style={{ margin: '16px 0' }} />
+            <Typography.Title level={5} style={{ marginTop: 0 }}>文章导入（Markdown）</Typography.Title>
+            <Upload.Dragger
+              multiple
+              maxCount={20}
+              accept=".md,.markdown,text/markdown"
+              beforeUpload={async (file) => {
+                const parsed = await parseMarkdownFiles([file])
+                setArticles((prev) => [...prev, ...parsed])
+                message.success(`${file.name} 已解析`)
+                return false
+              }}
+              showUploadList={{ showRemoveIcon: true, showPreviewIcon: false }}
+              onRemove={(file) => {
+                const name = file.name.replace(/\.(md|markdown)$/i, '')
+                setArticles((prev) => prev.filter(a => a.title !== name))
+              }}
+            >
+              <p>将 Markdown 文件拖拽到此处或点击上传</p>
+            </Upload.Dragger>
+
+            <Divider style={{ margin: '16px 0' }} />
+            <Typography.Title level={5} style={{ marginTop: 0 }}>主题自定义</Typography.Title>
+            <ThemePanel value={theme as ThemeTokens} onChange={setTheme} />
           </Col>
         </Row>
       </Modal>
