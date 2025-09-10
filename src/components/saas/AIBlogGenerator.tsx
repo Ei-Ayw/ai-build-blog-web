@@ -147,42 +147,41 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {/* Hero Section */}
+    <div className="min-h-screen bg-white">
+      <div className="max-w-6xl mx-auto px-6 py-16">
+        {/* Hero Section - 21st.dev风格 */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-20"
+          initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, ease: "easeOut" }}
         >
-          <div className="flex items-center justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center shadow-lg">
-              <Bot className="w-8 h-8 text-white" />
+          <div className="flex items-center justify-center mb-8">
+            <div className="w-20 h-20 bg-black rounded-3xl flex items-center justify-center">
+              <Bot className="w-10 h-10 text-white" />
             </div>
           </div>
           
-          <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            AI智能博客生成器
+          <h1 className="text-6xl md:text-7xl font-black text-black mb-6 leading-tight">
+            AI博客生成器
           </h1>
           
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            使用先进的人工智能技术，根据您的需求智能生成完整的博客内容和设计。
-            让创作变得简单而高效。
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
+            描述你的想法，AI为你生成完整的博客内容。从标题到正文，一切都在瞬间完成。
           </p>
           
-          <div className="flex items-center justify-center mt-8 space-x-6 text-sm text-gray-500">
+          <div className="flex items-center justify-center mt-12 space-x-8 text-sm text-gray-400">
             <div className="flex items-center">
-              <Star className="w-4 h-4 text-yellow-400 mr-1" />
-              智能内容生成
+              <div className="w-1 h-1 bg-gray-400 rounded-full mr-2"></div>
+              智能生成
             </div>
             <div className="flex items-center">
-              <Star className="w-4 h-4 text-yellow-400 mr-1" />
-              多种模板选择
+              <div className="w-1 h-1 bg-gray-400 rounded-full mr-2"></div>
+              多种模板
             </div>
             <div className="flex items-center">
-              <Star className="w-4 h-4 text-yellow-400 mr-1" />
-              一键导出部署
+              <div className="w-1 h-1 bg-gray-400 rounded-full mr-2"></div>
+              一键导出
             </div>
           </div>
         </motion.div>
@@ -196,14 +195,14 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <Card className="h-fit" padding="lg">
+            <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
               <div className="space-y-8">
                 <div>
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-2">
-                    创建您的博客
+                  <h2 className="text-3xl font-black text-black mb-3">
+                    开始创作
                   </h2>
-                  <p className="text-gray-600">
-                    描述您的需求，AI将为您生成完整的博客内容
+                  <p className="text-gray-600 font-light">
+                    描述你的想法，AI为你生成完整的博客内容
                   </p>
                 </div>
 
@@ -245,19 +244,27 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                 </div>
 
                 <div className="flex space-x-4">
-                  <Button
+                  <motion.button
                     onClick={handleAIGenerate}
-                    loading={loading}
-                    icon={<Bot size={16} />}
-                    fullWidth
-                    size="lg"
-                    variant="primary"
+                    disabled={loading}
+                    className="flex-1 px-8 py-4 bg-black text-white rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    {loading ? 'AI正在生成...' : '开始生成博客'}
-                  </Button>
+                    {loading ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        <span>AI正在生成...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Bot size={20} />
+                        <span>开始生成博客</span>
+                      </>
+                    )}
+                  </motion.button>
                   
-                  <Button
-                    variant="secondary"
+                  <motion.button
                     onClick={() => {
                       setFormData({
                         prompt: '我想创建一个技术博客，主要分享前端开发经验，包含React、Vue、Node.js等技术栈，目标读者是初级到中级的前端开发者',
@@ -266,13 +273,16 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                         author: '技术爱好者'
                       })
                     }}
-                    icon={<Lightbulb size={16} />}
+                    className="px-6 py-4 border-2 border-gray-200 text-gray-700 rounded-2xl font-medium text-lg transition-all duration-300 hover:border-gray-300 hover:bg-gray-50 flex items-center space-x-2"
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
                   >
-                    使用示例
-                  </Button>
+                    <Lightbulb size={20} />
+                    <span>使用示例</span>
+                  </motion.button>
                 </div>
               </div>
-            </Card>
+            </div>
           </motion.div>
 
           {/* 右侧：生成结果 */}
@@ -283,13 +293,13 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {generatedContent ? (
-              <Card className="h-fit" padding="lg">
+              <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                      <Check className="w-5 h-5 text-green-600" />
+                    <div className="w-10 h-10 bg-black rounded-2xl flex items-center justify-center">
+                      <Check className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="text-lg font-semibold text-gray-900">生成完成</h3>
+                    <h3 className="text-xl font-bold text-black">生成完成</h3>
                   </div>
 
                   <div className="space-y-4">
@@ -331,30 +341,30 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                   </div>
 
                   <div className="pt-4 border-t border-gray-200">
-                    <Button
+                    <motion.button
                       onClick={handleGenerateAndDownload}
-                      icon={<Download size={16} />}
-                      fullWidth
-                      size="lg"
-                      variant="primary"
+                      className="w-full px-6 py-4 bg-black text-white rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl flex items-center justify-center space-x-2"
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      生成并下载博客
-                    </Button>
+                      <Download size={20} />
+                      <span>生成并下载博客</span>
+                    </motion.button>
                   </div>
                 </div>
-              </Card>
+              </div>
             ) : (
-              <Card className="h-fit" padding="lg">
+              <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-sm">
                 <div className="text-center py-8">
-                  <div className="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gray-100 rounded-3xl flex items-center justify-center mx-auto mb-6">
                     <Sparkles className="w-8 h-8 text-gray-400" />
                   </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">等待生成</h3>
-                  <p className="text-gray-500 text-sm">
-                    填写左侧表单并点击生成按钮，AI将为您创建博客内容
+                  <h3 className="text-xl font-bold text-black mb-3">等待生成</h3>
+                  <p className="text-gray-500 font-light">
+                    填写左侧表单并点击生成按钮，AI将为你创建博客内容
                   </p>
                 </div>
-              </Card>
+              </div>
             )}
           </motion.div>
         </div>
@@ -362,34 +372,34 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
         {/* 文章列表预览 */}
         {generatedContent && (
           <motion.div
-            className="mt-12"
+            className="mt-16"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <Card padding="lg">
-              <div className="space-y-6">
+            <div className="bg-white border border-gray-100 rounded-3xl p-8 shadow-sm">
+              <div className="space-y-8">
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">生成的文章列表</h3>
-                  <p className="text-gray-600">AI为您创建的相关文章内容</p>
+                  <h3 className="text-3xl font-black text-black mb-3">生成的文章列表</h3>
+                  <p className="text-gray-600 font-light">AI为你创建的相关文章内容</p>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   {generatedContent.articles.map((article, index) => (
                     <motion.div
                       key={index}
-                      className="p-4 bg-gray-50 rounded-xl border border-gray-200 hover:border-teal-200 transition-colors"
+                      className="group p-6 bg-gray-50 rounded-2xl border border-gray-100 hover:border-gray-200 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <h4 className="font-medium text-gray-900 mb-2">{article.title}</h4>
-                      <p className="text-gray-600 text-sm">{article.excerpt}</p>
+                      <h4 className="font-bold text-black mb-3 group-hover:text-gray-700 transition-colors">{article.title}</h4>
+                      <p className="text-gray-600 font-light leading-relaxed">{article.excerpt}</p>
                     </motion.div>
                   ))}
                 </div>
               </div>
-            </Card>
+            </div>
           </motion.div>
         )}
       </div>

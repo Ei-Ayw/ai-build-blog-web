@@ -58,41 +58,46 @@ export default function App() {
     <div className="min-h-screen bg-white">
       <AbstractBackground />
       
-      {/* 导航栏 */}
+      {/* 导航栏 - 21st.dev风格 */}
       <motion.nav
-        className="relative z-10 border-b border-gray-200 bg-white/80 backdrop-blur-xl"
+        className="relative z-10 border-b border-gray-100 bg-white/90 backdrop-blur-2xl"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-7xl mx-auto px-6 py-4">
+        <div className="max-w-6xl mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <motion.div
               className="flex items-center space-x-3"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg flex items-center justify-center shadow-sm">
-                <Bot size={20} className="text-white" />
+              <div className="w-10 h-10 bg-black rounded-2xl flex items-center justify-center">
+                <Bot size={22} className="text-white" />
               </div>
-              <h1 className="text-xl font-bold text-gray-900">
-                Blog Builder
-              </h1>
+              <h1 className="text-xl font-bold text-black">BlogBuilder</h1>
             </motion.div>
 
             {/* 导航菜单 */}
-            <div className="flex space-x-2">
+            <div className="flex space-x-1">
               {navigationItems.map((item) => (
-                <Button
+                <motion.button
                   key={item.key}
-                  variant={currentPath === item.path ? 'primary' : 'ghost'}
-                  size="sm"
                   onClick={() => navigate(item.path)}
-                  icon={item.icon}
+                  className={`
+                    px-4 py-2 rounded-2xl font-medium text-sm transition-all duration-300 flex items-center space-x-2
+                    ${currentPath === item.path 
+                      ? 'bg-black text-white shadow-lg' 
+                      : 'text-gray-600 hover:text-black hover:bg-gray-100'
+                    }
+                  `}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  {item.label}
-                </Button>
+                  <span>{item.icon}</span>
+                  <span>{item.label}</span>
+                </motion.button>
               ))}
             </div>
           </div>
