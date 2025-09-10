@@ -150,45 +150,43 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* 导航栏 */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-6 py-4">
+      {/* 导航栏 - 21st.dev风格 */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-2xl border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 py-5">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <motion.div
               className="flex items-center space-x-3"
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg flex items-center justify-center shadow-sm">
-                <Bot size={20} className="text-white" />
+              <div className="w-10 h-10 bg-black rounded-2xl flex items-center justify-center">
+                <Bot size={22} className="text-white" />
               </div>
-              <h1 className="text-xl font-bold text-gray-900">Blog Builder</h1>
+              <h1 className="text-xl font-bold text-black">BlogBuilder</h1>
             </motion.div>
 
             {/* 桌面导航 */}
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">功能特性</a>
-              <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">定价方案</a>
-              <a href="#testimonials" className="text-gray-600 hover:text-gray-900 transition-colors">用户评价</a>
-              <a href="#faq" className="text-gray-600 hover:text-gray-900 transition-colors">常见问题</a>
+              <a href="#features" className="text-gray-600 hover:text-black transition-colors font-medium">功能</a>
+              <a href="#pricing" className="text-gray-600 hover:text-black transition-colors font-medium">定价</a>
+              <a href="#testimonials" className="text-gray-600 hover:text-black transition-colors font-medium">评价</a>
+              <a href="#faq" className="text-gray-600 hover:text-black transition-colors font-medium">帮助</a>
+            </div>
+
+            {/* CTA按钮 */}
+            <div className="hidden md:flex items-center space-x-3">
               <button 
                 onClick={() => navigate('/ai')} 
-                className="text-gray-600 hover:text-gray-900 transition-colors"
+                className="px-6 py-2.5 bg-black text-white rounded-2xl font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
               >
                 开始使用
               </button>
             </div>
 
-            {/* CTA按钮 */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Button variant="ghost" size="sm">登录</Button>
-              <Button variant="primary" size="sm">免费试用</Button>
-            </div>
-
             {/* 移动端菜单按钮 */}
             <button
-              className="md:hidden p-2"
+              className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -224,65 +222,110 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero区域 */}
-      <section className="pt-32 pb-20 px-6">
-        <div className="max-w-7xl mx-auto">
+      {/* Hero区域 - 21st.dev风格 */}
+      <section className="pt-24 pb-32 px-6 relative overflow-hidden">
+        {/* 背景装饰 */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-teal-400/10 to-cyan-400/10 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div className="max-w-6xl mx-auto">
           <div className="text-center">
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
+              transition={{ duration: 1, ease: "easeOut" }}
             >
-              <div className="inline-flex items-center px-4 py-2 bg-teal-50 text-teal-700 rounded-full text-sm font-medium mb-8">
-                <Sparkles className="w-4 h-4 mr-2" />
-                新一代AI博客生成工具
-              </div>
+              {/* 徽章 */}
+              <motion.div
+                className="inline-flex items-center px-6 py-3 bg-black/5 backdrop-blur-sm border border-black/10 rounded-full text-sm font-medium mb-12"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2, duration: 0.6 }}
+              >
+                <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
+                <span className="text-gray-700">AI驱动的博客创作平台</span>
+              </motion.div>
               
-              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-                让AI为您的
-                <span className="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent"> 内容创作 </span>
-                加速
-              </h1>
+              {/* 主标题 - 大胆排版 */}
+              <motion.h1
+                className="text-6xl md:text-8xl font-black text-black mb-8 leading-[0.9] tracking-tight"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3, duration: 0.8 }}
+              >
+                <span className="block">创建</span>
+                <span className="block bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
+                  完美博客
+                </span>
+                <span className="block text-4xl md:text-5xl font-light text-gray-500 mt-4">
+                  只需几秒钟
+                </span>
+              </motion.h1>
               
-              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
-                基于先进的大语言模型，智能生成高质量博客内容。
-                只需一句话描述，即可获得完整的博客文章，让创作变得简单高效。
-              </p>
+              {/* 副标题 - 简洁描述 */}
+              <motion.p
+                className="text-lg md:text-xl text-gray-600 mb-16 max-w-2xl mx-auto leading-relaxed font-light"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+              >
+                描述你的想法，AI为你生成完整的博客内容。从标题到正文，从排版到发布，一切都在瞬间完成。
+              </motion.p>
               
-              <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <Button
-                  variant="primary"
-                  size="xl"
-                  icon={<ArrowRight size={20} />}
-                  className="w-full sm:w-auto"
+              {/* CTA按钮 - 现代设计 */}
+              <motion.div
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.8 }}
+              >
+                <motion.button
                   onClick={() => navigate('/ai')}
+                  className="group relative px-8 py-4 bg-black text-white rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  免费开始使用
-                </Button>
-                <Button
-                  variant="secondary"
-                  size="xl"
-                  icon={<Play size={20} />}
-                  className="w-full sm:w-auto"
+                  <span className="relative z-10 flex items-center">
+                    开始创作
+                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                </motion.button>
+                
+                <motion.button
+                  className="px-8 py-4 border-2 border-gray-200 text-gray-700 rounded-2xl font-medium text-lg transition-all duration-300 hover:border-gray-300 hover:bg-gray-50"
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
                 >
-                  观看演示
-                </Button>
-              </div>
+                  <span className="flex items-center">
+                    <Play className="mr-2 w-5 h-5" />
+                    观看演示
+                  </span>
+                </motion.button>
+              </motion.div>
               
-              <div className="mt-12 flex items-center justify-center space-x-8 text-sm text-gray-500">
+              {/* 信任指标 - 极简设计 */}
+              <motion.div
+                className="flex items-center justify-center space-x-12 text-sm text-gray-400"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.9, duration: 0.8 }}
+              >
                 <div className="flex items-center">
-                  <Check className="w-4 h-4 text-green-500 mr-2" />
-                  无需信用卡
+                  <div className="w-1 h-1 bg-gray-400 rounded-full mr-2"></div>
+                  免费开始
                 </div>
                 <div className="flex items-center">
-                  <Check className="w-4 h-4 text-green-500 mr-2" />
-                  5分钟快速上手
+                  <div className="w-1 h-1 bg-gray-400 rounded-full mr-2"></div>
+                  无需注册
                 </div>
                 <div className="flex items-center">
-                  <Check className="w-4 h-4 text-green-500 mr-2" />
-                  24/7技术支持
+                  <div className="w-1 h-1 bg-gray-400 rounded-full mr-2"></div>
+                  即时生成
                 </div>
-              </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
@@ -347,21 +390,21 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 功能特性区域 */}
-      <section id="features" className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+      {/* 功能特性区域 - 21st.dev风格 */}
+      <section id="features" className="py-32 px-6 bg-white">
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              强大的功能特性
+            <h2 className="text-5xl md:text-6xl font-black text-black mb-6 leading-tight">
+              为什么选择我们
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              为内容创作者提供全方位的AI辅助工具，让创作变得更加高效
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light">
+              不仅仅是AI工具，更是你的创作伙伴
             </p>
           </motion.div>
 
@@ -369,18 +412,36 @@ export default function LandingPage() {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 30 }}
+                className="group relative"
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card className="h-full" padding="lg">
-                  <div className="w-12 h-12 bg-teal-50 rounded-xl flex items-center justify-center text-teal-600 mb-4">
+                <div className="relative p-8 bg-white border border-gray-100 rounded-3xl transition-all duration-500 group-hover:border-gray-200 group-hover:shadow-xl group-hover:-translate-y-2">
+                  {/* 背景装饰 */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* 图标 */}
+                  <div className="relative w-16 h-16 bg-black rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
                     {feature.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-3">{feature.title}</h3>
-                  <p className="text-gray-600">{feature.description}</p>
-                </Card>
+                  
+                  {/* 内容 */}
+                  <div className="relative">
+                    <h3 className="text-2xl font-bold text-black mb-4 group-hover:text-gray-700 transition-colors">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed font-light">
+                      {feature.description}
+                    </p>
+                  </div>
+                  
+                  {/* 悬停效果 */}
+                  <div className="absolute bottom-6 right-6 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">
+                    <ArrowRight className="w-4 h-4 text-gray-600" />
+                  </div>
+                </div>
               </motion.div>
             ))}
           </div>
