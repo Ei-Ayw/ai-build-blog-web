@@ -420,7 +420,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
       onClick={onClose}
     >
       <motion.div
-        className={`bg-white rounded  overflow-hidden ${
+        className={`bg-white rounded overflow-hidden ${
           isFullscreen ? 'w-full h-full rounded-none' : 'w-full max-w-7xl h-[90vh]'
         }`}
         initial={{ scale: 0.9, opacity: 0 }}
@@ -461,7 +461,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
         </div>
 
         {/* 完整的博客网站预览 */}
-        <div className="h-full overflow-hidden">
+        <div className="h-full overflow-auto" onWheel={(e) => e.stopPropagation()} onTouchMove={(e) => e.stopPropagation()}>
           <div className="template-preview" style={previewStyle}>
             {/* 博客头部 */}
             <header className="template-header">

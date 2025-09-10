@@ -68,7 +68,7 @@ export default function Input({
         
         {type === 'textarea' ? (
           <motion.textarea
-            className={`${inputClasses} ${icon ? 'pl-10' : ''}`}
+            className={`${inputClasses} ${icon ? 'pl-10' : ''} text-sm leading-6 py-2.5 min-h-[40px]`}
             value={value}
             onChange={handleChange}
             placeholder={placeholder}
@@ -83,7 +83,7 @@ export default function Input({
         ) : (
           <motion.input
             type={type}
-            className={`${inputClasses} ${icon ? 'pl-10' : ''}`}
+            className={`${inputClasses} ${icon ? 'pl-10' : ''} text-sm py-2.5 min-h-[40px]`}
             value={value}
             onChange={handleChange}
             placeholder={placeholder}

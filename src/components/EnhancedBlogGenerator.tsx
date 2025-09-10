@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
-import { 
-  Card, 
-  Button, 
-  Form, 
-  Input, 
-  Select, 
-  Space, 
-  Typography, 
-  message, 
-  Spin, 
+import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { Bot, FileText, Palette, User, Download, Check, Zap, Timer, CheckCircle2, UploadCloud, FileText as FileTextIcon } from 'lucide-react'
+import {
+  Card,
+  Button,
+  Form,
+  Input,
+  Select,
+  Space,
+  Typography,
+  message,
+  Spin,
   Divider,
   Row,
   Col,
@@ -18,9 +20,9 @@ import {
   Upload,
   Progress
 } from 'antd'
-import { 
-  ThunderboltOutlined, 
-  RobotOutlined, 
+import {
+  ThunderboltOutlined,
+  RobotOutlined,
   BulbOutlined,
   EditOutlined,
   UploadOutlined,
@@ -33,6 +35,10 @@ import { TencentCOSService } from '../services/tencentCOS'
 import { buildBlogZip, generateHtmlByTemplate } from '../utils/generator'
 import { parseMarkdownFiles, type Article } from '../utils/markdown'
 import AIContentOptimizer from './AIContentOptimizer'
+import Card21 from './21st/Card'
+import Button21 from './21st/Button'
+import Input21 from './21st/Input'
+import Select21 from './21st/Select'
 
 const { Title, Text } = Typography
 const { TextArea } = Input
@@ -52,6 +58,11 @@ export default function EnhancedBlogGenerator({ onGenerated, onDownload }: Enhan
   const [articles, setArticles] = useState<Article[]>([])
   const [uploadProgress, setUploadProgress] = useState(0)
   const [uploading, setUploading] = useState(false)
+  const [formSnapshot, setFormSnapshot] = useState<any>({ template: 'clean', style: 'professional', theme: 'clean', author: '' })
+  const [previewDevice, setPreviewDevice] = useState<'desktop' | 'mobile'>('desktop')
+  const [previewKey, setPreviewKey] = useState(0)
+  const previewAreaRef = useRef<HTMLDivElement>(null)
+  const [previewHeight, setPreviewHeight] = useState<number>(0)
 
   const templateOptions = [
     { value: 'clean', label: '极简白', description: '极简白底，强调阅读体验' },
@@ -84,6 +95,79 @@ export default function EnhancedBlogGenerator({ onGenerated, onDownload }: Enhan
       description: '生成博客并发布'
     }
   ]
+
+  // 实时预览HTML
+  const livePreviewHtml = useMemo(() => {
+    try {
+      if (generatedContent) {
+        const articlesPreview: Article[] = generatedContent.articles.map((a, i) => ({
+          title: a.title,
+          html: a.content,
+          slug: `article-${i + 1}`,
+          excerpt: a.excerpt
+        }))
+        return generateHtmlByTemplate(
+          {
+            title: generatedContent.title,
+            author: generatedContent.author,
+            tagline: generatedContent.tagline,
+            about: generatedContent.about
+          },
+          (generatedContent.theme as 'clean' | 'dark' | 'magazine') || 'clean',
+          { articles: articlesPreview }
+        )
+      }
+
+      const values = formSnapshot
+      const baseArticles: Article[] = articles.length
+        ? articles
+        : [
+            { title: '欢迎使用增强生成', html: '<p>这里会实时展示生成效果。</p>', slug: 'welcome', excerpt: '实时预览示例' }
+          ]
+
+      return generateHtmlByTemplate(
+        {
+          title: values?.title || '我的新博客',
+          author: values?.author || '作者',
+          tagline: values?.tagline || '让AI帮你更快地发布',
+          about: values?.about || '这里是关于我的简介……'
+        },
+        (values?.template as 'clean' | 'dark' | 'magazine') || 'clean',
+        { articles: baseArticles }
+      )
+    } catch (e) {
+      return '<html><body><div style="padding:16px;font-family:Inter,system-ui">预览加载中...</div></body></html>'
+    }
+  }, [generatedContent, articles, formSnapshot])
+
+  // 注入覆盖样式，去除模板内部的最大宽度限制并消除默认边距
+  const augmentedPreviewHtml = useMemo(() => {
+    const injection = `\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />\n<style>\n  html, body { margin: 0; padding: 0; width: 100%; height: 100%; }\n  body { -webkit-font-smoothing: antialiased; }\n  /* 解除常见容器的最大宽度限制，便于在预览中自适应 */\n  .container, main, header, footer, [class*=max-w-] { max-width: 100% !important; }\n  img, video, canvas, iframe { max-width: 100%; height: auto; }\n  /* 防止模板内层设置的固定宽影响预览 */\n  [style*=max-width] { max-width: 100% !important; }\n</style>\n`;
+    if (livePreviewHtml.includes('</head>')) {
+      return livePreviewHtml.replace('</head>', `${injection}</head>`)
+    }
+    // 简单兜底
+    return `<!doctype html><html><head>${injection}</head><body>${livePreviewHtml}</body></html>`
+  }, [livePreviewHtml])
+
+  // 计算中栏可用高度（首屏自适应，窗口变化时更新）
+  useEffect(() => {
+    const calc = () => {
+      const el = previewAreaRef.current
+      if (!el) return
+      const top = el.getBoundingClientRect().top
+      const h = Math.max(420, Math.floor(window.innerHeight - top - 24))
+      setPreviewHeight(h)
+    }
+    const ro = new ResizeObserver(calc)
+    if (previewAreaRef.current) ro.observe(previewAreaRef.current)
+    calc()
+    window.addEventListener('resize', calc)
+    return () => {
+      window.removeEventListener('resize', calc)
+      ro.disconnect()
+    }
+  }, [])
 
   const handleAIGenerate = async () => {
     try {
@@ -213,18 +297,26 @@ export default function EnhancedBlogGenerator({ onGenerated, onDownload }: Enhan
                   rows={6}
                   placeholder="例如：我想创建一个技术博客，主要分享前端开发经验，目标读者是初级到中级的前端开发者，希望内容专业但易懂，包含React、Vue、Node.js等技术栈..."
                   maxLength={1000}
+                  style={{ wordBreak: 'break-word', overflowWrap: 'anywhere' }}
                 />
               </Form.Item>
 
               <Row gutter={16}>
                 <Col span={8}>
                   <Form.Item name="template" label="模板选择">
-                    <Select placeholder="选择模板">
+                    <Select
+                      placeholder="选择模板"
+                      dropdownStyle={{ maxWidth: 480, whiteSpace: 'normal' }}
+                      dropdownMatchSelectWidth={false}
+                      optionLabelProp="label"
+                    >
                       {templateOptions.map(option => (
-                        <Option key={option.value} value={option.value}>
-                          <div>
-                            <div>{option.label}</div>
-                            <Text type="secondary" style={{ fontSize: 12 }}>
+                        <Option key={option.value} value={option.value} label={option.label}>
+                          <div style={{ maxWidth: '100%' }}>
+                            <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 500 }}>
+                              {option.label}
+                            </div>
+                            <Text type="secondary" style={{ fontSize: 12, display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal' }}>
                               {option.description}
                             </Text>
                           </div>
@@ -235,12 +327,19 @@ export default function EnhancedBlogGenerator({ onGenerated, onDownload }: Enhan
                 </Col>
                 <Col span={8}>
                   <Form.Item name="style" label="内容风格">
-                    <Select placeholder="选择风格">
+                    <Select
+                      placeholder="选择风格"
+                      dropdownStyle={{ maxWidth: 480, whiteSpace: 'normal' }}
+                      dropdownMatchSelectWidth={false}
+                      optionLabelProp="label"
+                    >
                       {styleOptions.map(option => (
-                        <Option key={option.value} value={option.value}>
-                          <div>
-                            <div>{option.label}</div>
-                            <Text type="secondary" style={{ fontSize: 12 }}>
+                        <Option key={option.value} value={option.value} label={option.label}>
+                          <div style={{ maxWidth: '100%' }}>
+                            <div style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', fontWeight: 500 }}>
+                              {option.label}
+                            </div>
+                            <Text type="secondary" style={{ fontSize: 12, display: 'block', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'normal' }}>
                               {option.description}
                             </Text>
                           </div>
@@ -257,19 +356,17 @@ export default function EnhancedBlogGenerator({ onGenerated, onDownload }: Enhan
               </Row>
 
               <Form.Item>
-                <Space>
-                  <Button
-                    type="primary"
-                    icon={<RobotOutlined />}
+                <Space style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
+                  <Button21
                     onClick={() => {
                       handleAIGenerate()
                       setCurrentStep(1)
                     }}
                     loading={loading}
-                    size="large"
+                    size="md"
                   >
                     开始AI生成
-                  </Button>
+                  </Button21>
                   <Button
                     icon={<BulbOutlined />}
                     onClick={() => {
@@ -490,26 +587,135 @@ export default function EnhancedBlogGenerator({ onGenerated, onDownload }: Enhan
   }
 
   return (
-    <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-      <Card>
-        <Title level={3} style={{ marginTop: 0, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <RobotOutlined style={{ color: '#1890ff' }} />
-          增强版AI博客生成器
-        </Title>
-        <Text type="secondary">
-          使用腾讯云大模型能力，通过智能步骤引导您创建完美的博客
-        </Text>
+    <div className="min-h-screen overflow-hidden">
+      {/* 顶部介绍移除（恢复前版本的三栏，但不显示Hero） */}
 
-        <Divider />
+      <div className="w-full px-4 lg:px-6 2xl:px-8 overflow-hidden">
+        <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-stretch mt-6 min-h-[calc(100vh-140px)] overflow-hidden">
+          {/* 左侧：制作信息 */}
+          <div className="xl:col-span-3 h-full flex flex-col ant-wrap-fix">
+            <div className="flex items-center space-x-2 mb-4">
+              <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
+                <Zap className="w-4 h-4 text-white" />
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold text-slate-900">增强版AI博客生成器</h2>
+                <p className="text-slate-600 text-sm mt-0.5">使用腾讯云大模型能力，通过智能步骤引导您创建完美的博客</p>
+              </div>
+            </div>
 
-        <Steps current={currentStep} style={{ marginBottom: 32 }}>
-          {steps.map((step, index) => (
-            <Step key={index} title={step.title} description={step.description} />
-          ))}
-        </Steps>
+            <Divider style={{ margin: '0 0 12px' }} />
 
-        {renderStepContent()}
-      </Card>
+            <div className="mb-6">
+              <Steps current={currentStep}>
+                {steps.map((step, index) => (
+                  <Step key={index} title={step.title} description={step.description} />
+                ))}
+              </Steps>
+            </div>
+
+            <div className="flex-1 overflow-auto" style={{ height: previewHeight }}>
+              {renderStepContent()}
+            </div>
+          </div>
+
+          {/* 中间：实时预览（不可滚动，去掉外层限制） */}
+          <div className="xl:col-span-7 h-full flex flex-col overflow-hidden">
+            <div className="px-4 py-3 border-b border-slate-200/60 flex items-center justify-end gap-2">
+                <button onClick={() => setPreviewDevice('desktop')} className={`px-2 py-1 text-xs rounded border ${previewDevice === 'desktop' ? 'bg-black text-white border-black' : 'border-slate-300 text-slate-700'}`}>桌面</button>
+                <button onClick={() => setPreviewDevice('mobile')} className={`px-2 py-1 text-xs rounded border ${previewDevice === 'mobile' ? 'bg-black text-white border-black' : 'border-slate-300 text-slate-700'}`}>移动</button>
+                <button onClick={() => setPreviewKey(k => k + 1)} className="px-2 py-1 text-xs rounded border border-slate-300 text-slate-700">刷新</button>
+              </div>
+              <div ref={previewAreaRef} className="flex-1 bg-slate-50 flex items-stretch justify-stretch overflow-hidden">
+                {previewDevice === 'desktop' ? (
+                  <div className="w-full bg-white shadow-2xl flex flex-col rounded-2xl border-2 border-slate-300" style={{ height: previewHeight }}>
+                    {/* macOS Safari top bar */}
+                    <div className="h-11 flex items-center px-3 border-b border-slate-300 bg-gradient-to-b from-slate-100 to-slate-50 rounded-t-2xl">
+                      <div className="flex items-center space-x-2 mr-3">
+                        <span className="w-3 h-3 rounded-full bg-red-400"></span>
+                        <span className="w-3 h-3 rounded-full bg-amber-400"></span>
+                        <span className="w-3 h-3 rounded-full bg-emerald-400"></span>
+                      </div>
+                      <div className="flex-1 h-7 bg-white border border-slate-300 rounded-full text-[11px] text-slate-500 flex items-center px-3 truncate shadow-inner">
+                        https://preview.local
+                      </div>
+                    </div>
+                    <div className="flex-1 overflow-hidden">
+                      <iframe key={previewKey} title="live-preview" srcDoc={livePreviewHtml} style={{ width: '100%', height: '100%', border: 0 }} />
+                    </div>
+                  </div>
+                ) : (
+                  <div className="w-[420px] max-w-full mx-auto" style={{ height: previewHeight }}>
+                    <div className="relative w-full h-full bg-black rounded-[36px] border-2 border-slate-300 shadow-2xl overflow-hidden">
+                      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-44 h-7 bg-black rounded-b-2xl z-10" />
+                      <div className="absolute inset-0 p-3 pt-9 bg-black">
+                        <div className="w-full h-full bg-white rounded-[28px] overflow-hidden">
+                          <iframe key={previewKey} title="live-preview" srcDoc={livePreviewHtml} style={{ width: '100%', height: '100%', border: 0 }} />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            
+          </div>
+
+          {/* 右侧：概览/发布 */}
+          <div className="xl:col-span-2 h-full flex flex-col">
+            <div className="sticky top-20 overflow-auto space-y-6" style={{ maxHeight: previewHeight }}>
+              <Card21 className="p-6">
+                <h3 className="text-sm font-semibold text-slate-900 mb-3">流程概览</h3>
+                <div className="space-y-2">
+                  {steps.map((step, index) => (
+                    <div key={index} className={`flex items-center justify-between text-sm rounded-lg border ${index === currentStep ? 'border-black bg-black text-white' : 'border-slate-200 text-slate-700'} px-3 py-2`}>
+                      <span>{step.title}</span>
+                      <span className={`text-xs ${index === currentStep ? 'opacity-90' : 'text-slate-400'}`}>{step.description}</span>
+                    </div>
+                  ))}
+                </div>
+              </Card21>
+
+              <div className="grid grid-cols-3 gap-3">
+                <Card21 className="p-4">
+                  <div className="text-xs text-slate-500 mb-1">预计用时</div>
+                  <div className="flex items-center space-x-2">
+                    <Timer className="w-4 h-4 text-slate-700" />
+                    <div className="text-sm font-semibold text-slate-900">2-5 分钟</div>
+                  </div>
+                </Card21>
+                <Card21 className="p-4">
+                  <div className="text-xs text-slate-500 mb-1">内容质量</div>
+                  <div className="flex items-center space-x-2">
+                    <CheckCircle2 className="w-4 h-4 text-slate-700" />
+                    <div className="text-sm font-semibold text-slate-900">高</div>
+                  </div>
+                </Card21>
+                <Card21 className="p-4">
+                  <div className="text-xs text-slate-500 mb-1">文章数</div>
+                  <div className="flex items-center space-x-2">
+                    <FileTextIcon className="w-4 h-4 text-slate-700" />
+                    <div className="text-sm font-semibold text-slate-900">3-8 篇</div>
+                  </div>
+                </Card21>
+              </div>
+
+              <Card21 className="p-6">
+                <h3 className="text-sm font-semibold text-slate-900 mb-3">发布提示</h3>
+                <ul className="text-sm text-slate-600 space-y-2 list-disc pl-5">
+                  <li>内容生成后可在左侧进行优化与补充</li>
+                  <li>支持导入 Markdown 文章丰富站点内容</li>
+                  <li>生成完成后可一键下载或上传到云端</li>
+                </ul>
+                <div className="pt-4">
+                  <Button21 icon={<UploadCloud size={14} />} fullWidth>
+                    生成并发布
+                  </Button21>
+                </div>
+              </Card21>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

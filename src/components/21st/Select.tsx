@@ -61,7 +61,7 @@ export default function Select({
         <motion.button
           type="button"
           className={`
-            w-full px-4 py-3 text-left bg-gray-800/50 border-2 rounded-xl
+            w-full px-3.5 py-2.5 text-left bg-gray-800/50 border-2 rounded-xl text-sm
             ${focused ? 'border-purple-500' : 'border-gray-600'}
             ${error ? 'border-red-500' : ''}
             ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
@@ -80,7 +80,7 @@ export default function Select({
                 {selectedOption.icon}
               </span>
             )}
-            <span className={selectedOption ? 'text-white' : 'text-gray-400'}>
+            <span className={`${selectedOption ? 'text-white' : 'text-gray-400'} truncate`}>
               {selectedOption ? selectedOption.label : placeholder}
             </span>
           </div>
@@ -98,7 +98,7 @@ export default function Select({
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="absolute z-50 w-full mt-2 bg-gray-800/95 backdrop-blur-xl border border-gray-600 rounded-xl  overflow-hidden"
+              className="absolute z-50 w-full mt-2 bg-gray-800/95 backdrop-blur-xl border border-gray-600 rounded-xl overflow-hidden text-sm"
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -109,7 +109,7 @@ export default function Select({
                   key={option.value}
                   type="button"
                   className={`
-                    w-full px-4 py-3 text-left hover:bg-gray-700/50 transition-colors duration-200
+                    w-full px-3.5 py-2.5 text-left hover:bg-gray-700/50 transition-colors duration-200
                     ${option.value === value ? 'bg-purple-500/20 text-purple-300' : 'text-gray-300'}
                     ${index === 0 ? 'rounded-t-xl' : ''}
                     ${index === options.length - 1 ? 'rounded-b-xl' : ''}
@@ -129,7 +129,7 @@ export default function Select({
                     <div>
                       <div className="font-medium">{option.label}</div>
                       {option.description && (
-                        <div className="text-sm text-gray-400 mt-1">
+                        <div className="text-gray-400 mt-1 text-[12px] leading-5">
                           {option.description}
                         </div>
                       )}

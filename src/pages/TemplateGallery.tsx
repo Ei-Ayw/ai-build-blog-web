@@ -9,14 +9,13 @@ import {
   Tag,
   Bot,
   Calendar,
-  User,
-  Clock,
-  BookOpen,
-  Heart
+  Clock
 } from 'lucide-react';
 import { blogTemplates, getTemplatesByCategory, getCategories, BlogTemplate } from '../data/templates';
 import TemplatePreview from '../components/TemplatePreview';
 import '../styles/template-preview.css';
+import Input21 from '../components/21st/Input'
+import Button21 from '../components/21st/Button'
 
 const TemplateGallery: React.FC = () => {
   const navigate = useNavigate();
@@ -25,9 +24,10 @@ const TemplateGallery: React.FC = () => {
   const [previewTemplate, setPreviewTemplate] = useState<BlogTemplate | null>(null);
   const [isFullscreen, setIsFullscreen] = useState(false);
 
-  const categories = getCategories();
+  // 限制分类展示数量（保留前5个）
+  const categories = getCategories().slice(0, 5);
   const filteredTemplates = useMemo(() => {
-    let templates = getTemplatesByCategory(selectedCategory);
+    let templates = getTemplatesByCategory(selectedCategory).slice(0, 8);
     
     if (searchTerm) {
       templates = templates.filter(template =>
@@ -41,11 +41,12 @@ const TemplateGallery: React.FC = () => {
   }, [selectedCategory, searchTerm]);
 
   const handleTemplateSelect = (template: BlogTemplate) => {
-    navigate('/ai', { 
-      state: { 
+    const base = window.location.pathname.startsWith('/ai-build-blog-web') ? '/ai-build-blog-web' : '';
+    navigate(`${base}/ai`, {
+      state: {
         selectedTemplate: template,
-        templateStyle: template.style 
-      } 
+        templateStyle: template.style
+      }
     });
   };
 
@@ -92,301 +93,155 @@ const TemplateGallery: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* 博客头部 - 参考繁星点点网站 */}
-      <motion.header
-        className="border-b border-gray-200"
-        initial={{ opacity: 0, y: -20 }}
+    <div className="min-h-screen">
+      {/* Compact Hero Section */}
+      <motion.div
+        className="relative py-12"
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-4xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-10 h-10 bg-black rounded flex items-center justify-center">
-                <Bot size={22} className="text-white" />
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-black">BlogBuilder</h1>
-                <p className="text-gray-600 text-sm">AI驱动的博客生成工具</p>
-              </div>
-            </div>
-            <nav className="flex space-x-6">
-              <button
-                onClick={() => navigate('/')}
-                className="text-gray-600 hover:text-black transition-colors"
-              >
-                首页
-              </button>
-              <button
-                onClick={() => navigate('/ai')}
-                className="text-gray-600 hover:text-black transition-colors"
-              >
-                生成博客
-              </button>
-              <button
-                onClick={() => navigate('/templates')}
-                className="text-black font-medium"
-              >
-                模板库
-              </button>
-            </nav>
-          </div>
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <h1 className="text-2xl md:text-3xl font-black text-slate-900 mb-2 tracking-tight">模板库</h1>
+          <p className="text-slate-600 text-base max-w-2xl mx-auto leading-relaxed">简洁、优雅、现代的模板集合。选择风格，快速生成高端的博客站点。</p>
         </div>
-      </motion.header>
+      </motion.div>
 
-      {/* 博客内容区域 */}
-      <div className="max-w-4xl mx-auto px-6 py-8">
-        {/* 页面标题 */}
+      <div className="max-w-7xl mx-auto px-6 py-8">
+
+        {/* 分类切换 - 黑色胶囊风格 */}
         <motion.div
           className="mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.6, delay: 0.15 }}
         >
-          <h1 className="text-4xl font-bold text-black mb-4">博客模板库</h1>
-          <p className="text-gray-600 text-lg leading-relaxed">
-            选择适合您需求的博客模板，让AI为您生成专业的内容。每个模板都经过精心设计，确保您的博客既美观又实用。
-          </p>
-        </motion.div>
-
-        {/* 搜索和筛选 */}
-        <motion.div
-          className="mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div className="flex flex-col lg:flex-row gap-4">
-            <div className="flex-1 relative">
-              <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="搜索模板..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-              />
-            </div>
-            <div className="flex gap-2 overflow-x-auto">
-              <button
-                onClick={() => setSelectedCategory('all')}
-                className={`px-4 py-2 rounded font-medium whitespace-nowrap transition-all duration-300 ${
-                  selectedCategory === 'all'
-                    ? 'bg-black text-white'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            <Button21
+              onClick={() => setSelectedCategory('all')}
+              variant={selectedCategory === 'all' ? 'primary' : 'ghost'}
+              size="sm"
+            >
+              全部模板
+            </Button21>
+            {categories.map((category) => (
+              <Button21
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                variant={selectedCategory === category ? 'primary' : 'ghost'}
+                size="sm"
               >
-                全部模板
-              </button>
-              {categories.map((category) => (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded font-medium whitespace-nowrap transition-all duration-300 ${
-                    selectedCategory === category
-                      ? 'bg-black text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {category}
-                </button>
-              ))}
-            </div>
+                {category}
+              </Button21>
+            ))}
           </div>
         </motion.div>
 
-        {/* 模板列表 - 真正的博客风格 */}
+        {/* 模板网格 - 紧凑卡片布局 */}
         <motion.div
-          className="space-y-12"
+          className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           {filteredTemplates.map((template, index) => (
-            <motion.article
+            <motion.div
               key={template.id}
-              className="border-b border-gray-200 pb-12 last:border-b-0"
+              className="group cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
+              onClick={() => handlePreviewTemplate(template)}
             >
-              {/* 模板标题和描述 */}
-              <div className="mb-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h2 className="text-3xl font-bold text-black mb-2 hover:text-gray-700 transition-colors cursor-pointer"
-                        onClick={() => handlePreviewTemplate(template)}>
-                      {template.name}
-                    </h2>
-                    <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                      <span className="flex items-center">
-                        <Tag className="w-4 h-4 mr-1" />
-                        {template.category}
-                      </span>
-                      <span className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        2024年1月
-                      </span>
-                      <span className="flex items-center">
-                        <Clock className="w-4 h-4 mr-1" />
-                        5分钟阅读
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center text-yellow-500">
-                    <Star className="w-4 h-4 fill-current" />
-                    <span className="text-sm ml-1">4.8</span>
-                  </div>
-                </div>
-                <p className="text-gray-600 leading-relaxed text-lg">
-                  {template.description}
-                </p>
-              </div>
-
-              {/* 网站首页预览 - 完整的博客首页效果 */}
-              <div className="bg-gray-50 rounded-lg p-6 mb-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold text-gray-800">网站首页预览</h3>
-                  <button
-                    onClick={() => handlePreviewTemplate(template)}
-                    className="px-4 py-2 bg-black text-white rounded text-sm font-medium hover: transition-all duration-300 flex items-center space-x-2"
-                  >
-                    <Eye className="w-4 h-4" />
-                    <span>查看完整效果</span>
-                  </button>
-                </div>
-                
-                {/* 模拟的博客首页 */}
-                <div className="bg-white rounded border  overflow-hidden">
-                  {/* 博客头部 */}
-                  <div className="border-b border-gray-200 px-6 py-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <div
-                          className="w-8 h-8 rounded flex items-center justify-center text-white text-sm font-bold"
-                          style={{ backgroundColor: template.style.colors.primary }}
-                        >
-                          B
+              <div className="bg-white/70 backdrop-blur-sm border border-slate-200/60 rounded-xl p-5 h-full transition-all duration-300 group-hover:bg-white/90 group-hover:shadow-lg group-hover:shadow-slate-200/25 group-hover:-translate-y-1">
+                {/* 模板预览截图区域 */}
+                <div className="relative mb-4">
+                  <div className="aspect-[4/3] bg-gradient-to-br from-slate-100 to-slate-200 rounded-lg overflow-hidden">
+                    <div className="w-full h-full bg-gradient-to-br"
+                         style={{
+                           background: `linear-gradient(135deg, ${template.style.colors.primary}15, ${template.style.colors.secondary}10)`
+                         }}>
+                      <div className="p-3 h-full flex flex-col justify-between">
+                        <div className="space-y-1.5">
+                          <div className="h-1.5 bg-white/60 rounded w-3/4"></div>
+                          <div className="h-1 bg-white/40 rounded w-1/2"></div>
+                          <div className="h-1 bg-white/40 rounded w-2/3"></div>
                         </div>
-                        <span className="text-lg font-bold" style={{ color: template.style.colors.text }}>
-                          {template.name}
-                        </span>
-                      </div>
-                      <nav className="flex space-x-6 text-sm">
-                        <a href="#" className="hover:opacity-70 transition-opacity" style={{ color: template.style.colors.text }}>
-                          首页
-                        </a>
-                        <a href="#" className="hover:opacity-70 transition-opacity" style={{ color: template.style.colors.text }}>
-                          文章
-                        </a>
-                        <a href="#" className="hover:opacity-70 transition-opacity" style={{ color: template.style.colors.text }}>
-                          关于
-                        </a>
-                      </nav>
-                    </div>
-                  </div>
-
-                  {/* 博客内容区域 */}
-                  <div className="px-6 py-6">
-                    {/* 博客标题 */}
-                    <div className="text-center mb-8">
-                      <h1 className="text-3xl font-bold mb-4" style={{ color: template.style.colors.text }}>
-                        {template.name}
-                      </h1>
-                      <p className="text-lg" style={{ color: template.style.colors.text }}>
-                        热爱技术与分享的博客作者
-                      </p>
-                    </div>
-
-                    {/* 最新文章列表 - 参考繁星点点网站 */}
-                    <div className="mb-8">
-                      <h2 className="text-xl font-bold mb-4" style={{ color: template.style.colors.text }}>
-                        最新文章
-                      </h2>
-                      <div className="space-y-4">
-                        {sampleArticles.map((article, articleIndex) => (
-                          <div key={articleIndex} className="border-b border-gray-100 pb-4 last:border-b-0">
-                            <div className="flex items-start justify-between">
-                              <div className="flex-1">
-                                <div className="flex items-center space-x-2 mb-1">
-                                  {article.featured && (
-                                    <span className="px-2 py-1 bg-yellow-100 text-yellow-800 text-xs rounded">
-                                      精选
-                                    </span>
-                                  )}
-                                  <h3 className="text-lg font-semibold hover:text-gray-600 transition-colors cursor-pointer" 
-                                      style={{ color: template.style.colors.text }}>
-                                    {article.title}
-                                  </h3>
-                                </div>
-                                <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-                                  {article.excerpt}
-                                </p>
-                                <div className="flex items-center space-x-4 text-xs text-gray-500">
-                                  <span>{article.date}</span>
-                                  <span>{article.readTime}</span>
-                                  <span>{article.category}</span>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="mt-4">
-                        <button className="text-sm font-medium hover:opacity-70 transition-opacity" 
-                                style={{ color: template.style.colors.accent }}>
-                          查看全部文章 →
-                        </button>
+                        <div className="space-y-1">
+                          <div className="h-1 bg-white/40 rounded w-full"></div>
+                          <div className="h-1 bg-white/40 rounded w-3/4"></div>
+                        </div>
                       </div>
                     </div>
-
-                    {/* 关于博客 */}
-                    <div className="bg-gray-50 rounded p-4">
-                      <h3 className="text-lg font-semibold mb-2" style={{ color: template.style.colors.text }}>
-                        关于博客
-                      </h3>
-                      <p className="text-sm text-gray-600">
-                        一个分享网络知识的博客站点，欢迎来到{template.name}博客。转载请注明出处。
-                      </p>
-                    </div>
                   </div>
-
-                  {/* 博客页脚 */}
-                  <div className="border-t border-gray-200 px-6 py-4 text-center text-sm text-gray-500">
-                    <p>© 2024 {template.name}. 保留所有权利.</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* 标签和操作按钮 */}
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                <div className="flex flex-wrap gap-2">
-                  {template.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 bg-gray-100 text-gray-600 text-sm rounded"
-                    >
-                      {tag}
+                  {/* 模板类型标签 */}
+                  <div className="absolute top-2 right-2">
+                    <span className="px-1.5 py-0.5 bg-white/80 backdrop-blur-sm text-slate-700 text-xs font-medium rounded">
+                      {template.category}
                     </span>
-                  ))}
+                  </div>
+                  {/* 评分 */}
+                  <div className="absolute top-2 left-2 flex items-center space-x-1">
+                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                    <span className="text-xs font-medium text-slate-700">4.8</span>
+                  </div>
                 </div>
-                
-                <div className="flex space-x-3">
-                  <motion.button
-                    onClick={() => handleTemplateSelect(template)}
-                    className="px-6 py-2 bg-black text-white rounded font-medium hover: transition-all duration-300 flex items-center space-x-2"
-                    whileHover={{ y: -1 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    <span>使用此模板</span>
-                    <ArrowRight className="w-4 h-4" />
-                  </motion.button>
+
+                {/* 模板信息 */}
+                <div className="space-y-3">
+                  <div>
+                    <h3 className="text-lg font-semibold text-slate-900 mb-1 group-hover:text-slate-700 transition-colors line-clamp-1">
+                      {template.name}
+                    </h3>
+                    <p className="text-slate-600 text-xs leading-relaxed line-clamp-2">
+                      {template.description}
+                    </p>
+                  </div>
+
+                  {/* 标签 */}
+                  <div className="flex flex-wrap gap-1">
+                    {template.tags.slice(0, 2).map((tag) => (
+                      <span
+                        key={tag}
+                        className="px-1.5 py-0.5 bg-slate-100 text-slate-600 text-xs rounded"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* 操作按钮 */}
+                  <div className="flex space-x-2">
+                    <Button21
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handlePreviewTemplate(template)
+                      }}
+                      variant="ghost"
+                      size="sm"
+                      className="flex-1"
+                      icon={<Eye size={12} />}
+                    >
+                      预览
+                    </Button21>
+                    <Button21
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        handleTemplateSelect(template)
+                      }}
+                      size="sm"
+                      className="flex-1"
+                      icon={<ArrowRight size={12} />}
+                    >
+                      使用
+                    </Button21>
+                  </div>
                 </div>
               </div>
-            </motion.article>
+            </motion.div>
           ))}
         </motion.div>
+
 
         {/* 空状态 */}
         {filteredTemplates.length === 0 && (
@@ -396,31 +251,31 @@ const TemplateGallery: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Search className="w-12 h-12 text-gray-400" />
+            <div className="w-16 h-16 bg-slate-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <Search className="w-8 h-8 text-slate-400" />
             </div>
-            <h3 className="text-xl font-bold text-gray-900 mb-2">未找到匹配的模板</h3>
-            <p className="text-gray-600 mb-6">尝试调整搜索条件或选择其他分类</p>
-            <button
+            <h3 className="text-xl font-semibold text-slate-900 mb-2">未找到匹配的模板</h3>
+            <p className="text-slate-600 mb-6 max-w-sm mx-auto">尝试调整搜索条件或选择其他分类</p>
+            <Button21
               onClick={() => {
                 setSearchTerm('');
                 setSelectedCategory('all');
               }}
-              className="px-6 py-3 bg-black text-white rounded font-medium hover: transition-all duration-300"
+              size="md"
             >
               重置筛选
-            </button>
+            </Button21>
           </motion.div>
         )}
 
         {/* 页脚 */}
         <motion.footer
-          className="mt-16 pt-8 border-t border-gray-200 text-center text-gray-600"
+          className="mt-16 pt-8 border-t border-slate-200/60 text-center"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          <p>© 2024 BlogBuilder. 保留所有权利.</p>
+          <p className="text-slate-500 text-xs">© 2024 BlogBuilder. 保留所有权利.</p>
         </motion.footer>
       </div>
 

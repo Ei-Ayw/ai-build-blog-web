@@ -55,6 +55,9 @@ export default function App() {
   const location = useLocation()
   const navigate = useNavigate()
   const currentPath = location.pathname
+  const isGhPagesBase = currentPath.startsWith('/ai-build-blog-web')
+  const base = isGhPagesBase ? '/ai-build-blog-web' : ''
+  const resolvePath = (p: string) => `${base}${p}`
 
   // 如果是首页，直接显示Landing Page
   if (currentPath === '/' || currentPath === '/ai-build-blog-web/') {
@@ -91,10 +94,10 @@ export default function App() {
               {navigationItems.map((item) => (
                 <motion.button
                   key={item.key}
-                  onClick={() => navigate(item.path)}
+                  onClick={() => navigate(resolvePath(item.path))}
                   className={`
                     px-4 py-2 rounded font-medium text-sm transition-all duration-300 flex items-center space-x-2
-                    ${currentPath === item.path 
+                    ${currentPath === item.path || currentPath === resolvePath(item.path)
                       ? 'bg-black text-white ' 
                       : 'text-gray-600 hover:text-black hover:bg-gray-100'
                     }
@@ -124,6 +127,12 @@ export default function App() {
                           <Route path="/enhanced" element={<EnhancedBlogGenerator />} />
                           <Route path="/ai" element={<AIBlogGenerator />} />
                           <Route path="/hero" element={<HeroParallaxPage />} />
+                          {/* GH Pages base-prefixed routes */}
+                          <Route path="/ai-build-blog-web/templates" element={<TemplateGallery />} />
+                          <Route path="/ai-build-blog-web/one" element={<OneSentencePage />} />
+                          <Route path="/ai-build-blog-web/enhanced" element={<EnhancedBlogGenerator />} />
+                          <Route path="/ai-build-blog-web/ai" element={<AIBlogGenerator />} />
+                          <Route path="/ai-build-blog-web/hero" element={<HeroParallaxPage />} />
                         </Routes>
       </motion.main>
     </div>
