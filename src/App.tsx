@@ -2,6 +2,7 @@ import React from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Bot, Sparkles, Zap, FileText } from 'lucide-react'
+import LandingPage from './pages/LandingPage'
 import TemplatesPage from './pages/TemplatesPage'
 import OneSentencePage from './pages/OneSentencePage'
 import EnhancedBlogGenerator from './components/EnhancedBlogGenerator'
@@ -14,8 +15,14 @@ const navigationItems = [
   { 
     key: '/', 
     icon: <FileText size={18} />, 
-    label: '模板生成',
+    label: '首页',
     path: '/'
+  },
+  { 
+    key: '/templates', 
+    icon: <FileText size={18} />, 
+    label: '模板生成',
+    path: '/templates'
   },
   { 
     key: '/one', 
@@ -95,7 +102,8 @@ export default function App() {
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         <Routes>
-          <Route path="/" element={<TemplatesPage />} />
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/templates" element={<TemplatesPage />} />
           <Route path="/one" element={<OneSentencePage />} />
           <Route path="/enhanced" element={<EnhancedBlogGenerator />} />
           <Route path="/ai" element={<AIBlogGenerator />} />
