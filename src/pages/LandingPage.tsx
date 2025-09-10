@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { useNavigate } from 'react-router-dom'
 import { 
   ArrowRight, 
   Check, 
@@ -22,6 +23,7 @@ import Card from '../components/saas/Card'
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const navigate = useNavigate()
 
   const features = [
     {
@@ -170,7 +172,12 @@ export default function LandingPage() {
               <a href="#pricing" className="text-gray-600 hover:text-gray-900 transition-colors">定价方案</a>
               <a href="#testimonials" className="text-gray-600 hover:text-gray-900 transition-colors">用户评价</a>
               <a href="#faq" className="text-gray-600 hover:text-gray-900 transition-colors">常见问题</a>
-              <a href="/ai" className="text-gray-600 hover:text-gray-900 transition-colors">开始使用</a>
+              <button 
+                onClick={() => navigate('/ai')} 
+                className="text-gray-600 hover:text-gray-900 transition-colors"
+              >
+                开始使用
+              </button>
             </div>
 
             {/* CTA按钮 */}
@@ -201,7 +208,12 @@ export default function LandingPage() {
                 <a href="#pricing" className="text-gray-600 hover:text-gray-900">定价方案</a>
                 <a href="#testimonials" className="text-gray-600 hover:text-gray-900">用户评价</a>
                 <a href="#faq" className="text-gray-600 hover:text-gray-900">常见问题</a>
-                <a href="/ai" className="text-gray-600 hover:text-gray-900">开始使用</a>
+                <button 
+                  onClick={() => navigate('/ai')} 
+                  className="text-gray-600 hover:text-gray-900 text-left"
+                >
+                  开始使用
+                </button>
                 <div className="flex space-x-4 pt-4">
                   <Button variant="ghost" size="sm" fullWidth>登录</Button>
                   <Button variant="primary" size="sm" fullWidth>免费试用</Button>
@@ -238,16 +250,15 @@ export default function LandingPage() {
               </p>
               
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-                <a href="/ai">
-                  <Button
-                    variant="primary"
-                    size="xl"
-                    icon={<ArrowRight size={20} />}
-                    className="w-full sm:w-auto"
-                  >
-                    免费开始使用
-                  </Button>
-                </a>
+                <Button
+                  variant="primary"
+                  size="xl"
+                  icon={<ArrowRight size={20} />}
+                  className="w-full sm:w-auto"
+                  onClick={() => navigate('/ai')}
+                >
+                  免费开始使用
+                </Button>
                 <Button
                   variant="secondary"
                   size="xl"
@@ -549,16 +560,15 @@ export default function LandingPage() {
               立即注册，体验AI驱动的博客生成工具
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <a href="/ai">
-                <Button
-                  variant="primary"
-                  size="xl"
-                  icon={<ArrowRight size={20} />}
-                  className="w-full sm:w-auto"
-                >
-                  免费开始使用
-                </Button>
-              </a>
+              <Button
+                variant="primary"
+                size="xl"
+                icon={<ArrowRight size={20} />}
+                className="w-full sm:w-auto"
+                onClick={() => navigate('/ai')}
+              >
+                免费开始使用
+              </Button>
               <Button
                 variant="secondary"
                 size="xl"
