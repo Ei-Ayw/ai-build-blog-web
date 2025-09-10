@@ -6,6 +6,7 @@ import LandingPage from './pages/LandingPage'
 import TemplatesPage from './pages/TemplatesPage'
 import OneSentencePage from './pages/OneSentencePage'
 import TemplateGallery from './pages/TemplateGallery'
+import HeroParallaxPage from './pages/HeroParallaxPage'
 import EnhancedBlogGenerator from './components/EnhancedBlogGenerator'
 import AIBlogGenerator from './components/saas/AIBlogGenerator'
 import AbstractBackground from './components/saas/AbstractBackground'
@@ -41,6 +42,12 @@ const navigationItems = [
     icon: <Sparkles size={18} />, 
     label: '现代AI生成',
     path: '/ai'
+  },
+  { 
+    key: '/hero', 
+    icon: <Layout size={18} />, 
+    label: 'Hero视差',
+    path: '/hero'
   }
 ]
 
@@ -116,6 +123,7 @@ export default function App() {
                           <Route path="/one" element={<OneSentencePage />} />
                           <Route path="/enhanced" element={<EnhancedBlogGenerator />} />
                           <Route path="/ai" element={<AIBlogGenerator />} />
+                          <Route path="/hero" element={<HeroParallaxPage />} />
                         </Routes>
       </motion.main>
     </div>

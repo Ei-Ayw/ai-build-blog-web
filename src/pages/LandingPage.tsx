@@ -20,7 +20,7 @@ import {
 } from 'lucide-react'
 import Button from '../components/saas/Button'
 import Card from '../components/saas/Card'
-import { AuroraBackground } from '../components/ui/aurora-background'
+import { HeroWithParallax } from '../components/ui/hero-with-parallax'
 import { blogTemplates } from '../data/templates'
 
 export default function LandingPage() {
@@ -151,7 +151,7 @@ export default function LandingPage() {
   ]
 
   return (
-    <AuroraBackground className="min-h-screen" showRadialGradient={true}>
+    <div className="min-h-screen bg-white dark:bg-black">
       {/* 导航栏 - Aurora风格 */}
       <nav className="fixed top-0 left-0 right-0 z-[100] bg-black/20 backdrop-blur-2xl border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
@@ -222,87 +222,8 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero区域 - Aurora背景风格 */}
-      <section className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 pt-24">
-        <motion.div
-          className="text-center max-w-7xl mx-auto w-full"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
-            {/* 主标题 - 响应式设计 */}
-            <motion.h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-center mb-6 sm:mb-8 leading-tight"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-            >
-              <span className="block text-black ">Create Perfect Blogs</span>
-              <span className="block text-black ">
-                In Seconds
-              </span>
-            </motion.h1>
-            
-            {/* 副标题 - 响应式设计 */}
-            <motion.div
-              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-black/80 py-4 mb-12 sm:mb-16 max-w-4xl mx-auto leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5, duration: 0.8 }}
-            >
-              <p className=" mb-2 sm:mb-4 font-medium">Describe your ideas, AI generates complete blog content.</p>
-              <p className=" font-medium">From title to content, from layout to publish, everything happens in seconds.</p>
-            </motion.div>
-            
-            {/* CTA按钮 - 响应式设计 */}
-            <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
-            >
-              <motion.button
-                onClick={() => navigate('/ai-build-blog-web/templates')}
-                className="w-full sm:w-auto bg-white text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white/90  flex items-center justify-center space-x-2"
-                whileHover={{ y: -2, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <span>Browse Templates</span>
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
-              </motion.button>
-              
-              <motion.button
-                className="w-full sm:w-auto bg-transparent border-2 border-black text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg transition-all duration-300 hover:bg-black hover:text-white  flex items-center justify-center space-x-2"
-                whileHover={{ y: -2, scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-              >
-                <Play className="w-4 h-4 sm:w-5 sm:h-5" />
-                <span>Watch Demo</span>
-              </motion.button>
-            </motion.div>
-            
-            {/* 信任指标 - 响应式设计 */}
-            <motion.div
-              className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 lg:space-x-12 text-xs sm:text-sm text-black/70"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9, duration: 0.8 }}
-            >
-              <div className="flex items-center">
-                <div className="w-1 h-1 bg-black/70 rounded-full mr-2"></div>
-                Free to Start
-              </div>
-              <div className="flex items-center">
-                <div className="w-1 h-1 bg-black/70 rounded-full mr-2"></div>
-                No Registration
-              </div>
-              <div className="flex items-center">
-                <div className="w-1 h-1 bg-black/70 rounded-full mr-2"></div>
-                Instant Generation
-              </div>
-            </motion.div>
-          </motion.div>
-        </section>
+      {/* Hero区域 - 带视差效果的Aurora背景 */}
+      <HeroWithParallax />
 
       {/* 产品演示区域 - Aurora风格 */}
       <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
@@ -667,6 +588,6 @@ export default function LandingPage() {
           </div>
         </div>
       </footer>
-    </AuroraBackground>
+    </div>
   )
 }
