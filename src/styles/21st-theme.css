@@ -1,0 +1,449 @@
+/* 21st.dev 风格主题系统 */
+
+:root {
+  /* 主色调 - 基于21st.dev的紫色和蓝色渐变 */
+  --primary: #6d5dfc;
+  --primary-dark: #5a4fcf;
+  --primary-light: #8b7ffc;
+  --secondary: #b747ff;
+  --accent: #00d4ff;
+  
+  /* 背景色系 */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --bg-glass: rgba(255, 255, 255, 0.1);
+  
+  /* 文字色系 */
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+  
+  /* 边框和分割线 */
+  --border-primary: rgba(255, 255, 255, 0.1);
+  --border-secondary: rgba(255, 255, 255, 0.05);
+  --border-glow: rgba(109, 93, 252, 0.3);
+  
+  /* 阴影和光效 */
+  --shadow-glow: 0 0 20px rgba(109, 93, 252, 0.3);
+  --shadow-glow-strong: 0 0 40px rgba(109, 93, 252, 0.5);
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.3);
+  
+  /* 渐变背景 */
+  --gradient-primary: linear-gradient(135deg, #6d5dfc 0%, #b747ff 100%);
+  --gradient-secondary: linear-gradient(135deg, #00d4ff 0%, #6d5dfc 100%);
+  --gradient-bg: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+  --gradient-card: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+}
+
+/* 全局样式重置 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* 21st.dev 风格的按钮 */
+.btn-21st {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: var(--gradient-primary);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  text-decoration: none;
+  box-shadow: var(--shadow-glow);
+}
+
+.btn-21st::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-21st:hover::before {
+  left: 100%;
+}
+
+.btn-21st:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow-strong);
+}
+
+.btn-21st:active {
+  transform: translateY(0);
+}
+
+/* 发光按钮变体 */
+.btn-glow {
+  background: transparent;
+  border: 2px solid var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 20px rgba(109, 93, 252, 0.3);
+}
+
+.btn-glow:hover {
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 0 30px rgba(109, 93, 252, 0.6);
+}
+
+/* 21st.dev 风格的卡片 */
+.card-21st {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-primary);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-21st::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-primary);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card-21st:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-glow);
+  box-shadow: var(--shadow-glow);
+}
+
+.card-21st:hover::before {
+  opacity: 1;
+}
+
+/* 玻璃态卡片 */
+.card-glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-secondary);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* 21st.dev 风格的输入框 */
+.input-21st {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-primary);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+}
+
+.input-21st:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(109, 93, 252, 0.1);
+  background: var(--bg-tertiary);
+}
+
+.input-21st::placeholder {
+  color: var(--text-muted);
+}
+
+/* 21st.dev 风格的选择器 */
+.select-21st {
+  position: relative;
+  width: 100%;
+}
+
+.select-21st select {
+  width: 100%;
+  padding: 16px 20px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-primary);
+  border-radius: 12px;
+  color: var(--text-primary);
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px;
+  padding-right: 48px;
+}
+
+.select-21st select:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(109, 93, 252, 0.1);
+}
+
+/* 21st.dev 风格的标签页 */
+.tabs-21st {
+  display: flex;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 4px;
+  border: 1px solid var(--border-primary);
+}
+
+.tab-21st {
+  flex: 1;
+  padding: 12px 20px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.tab-21st.active {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: var(--shadow-glow);
+}
+
+.tab-21st:hover:not(.active) {
+  color: var(--text-primary);
+  background: var(--bg-tertiary);
+}
+
+/* 21st.dev 风格的徽章 */
+.badge-21st {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-primary);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.badge-21st:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  box-shadow: 0 0 10px rgba(109, 93, 252, 0.2);
+}
+
+/* 21st.dev 风格的加载动画 */
+.loader-21st {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--border-primary);
+  border-radius: 50%;
+  border-top-color: var(--primary);
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 21st.dev 风格的进度条 */
+.progress-21st {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-21st-bar {
+  height: 100%;
+  background: var(--gradient-primary);
+  border-radius: 4px;
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-21st-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-image: linear-gradient(
+    -45deg,
+    rgba(255, 255, 255, 0.2) 25%,
+    transparent 25%,
+    transparent 50%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.2) 75%,
+    transparent 75%,
+    transparent
+  );
+  background-size: 50px 50px;
+  animation: move 2s linear infinite;
+}
+
+@keyframes move {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+/* 21st.dev 风格的模态框 */
+.modal-21st {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.modal-21st-content {
+  background: var(--bg-card);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-primary);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.modal-21st-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-primary);
+}
+
+/* 21st.dev 风格的背景动画 */
+.bg-animated {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: var(--gradient-bg);
+  overflow: hidden;
+}
+
+.bg-animated::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(109, 93, 252, 0.1) 0%,
+    transparent 50%
+  );
+  animation: rotate 20s linear infinite;
+}
+
+.bg-animated::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(183, 71, 255, 0.1) 0%,
+    transparent 50%
+  );
+  animation: rotate 15s linear infinite reverse;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .card-21st {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  
+  .btn-21st {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+  
+  .input-21st {
+    padding: 12px 16px;
+  }
+  
+  .modal-21st-content {
+    padding: 24px;
+    margin: 20px;
+  }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-light);
+}

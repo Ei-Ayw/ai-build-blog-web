@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from 'react'
-import { Card, Col, Row, Button, Modal, Form, Input, message, Space, Typography, Tag, Upload, Divider } from 'antd'
-import { EyeOutlined, ThunderboltOutlined } from '@ant-design/icons'
+import { Card, Col, Row, Button, Modal, Form, Input, message, Space, Typography, Tag, Upload, Divider, Tabs } from 'antd'
+import { EyeOutlined, ThunderboltOutlined, RobotOutlined } from '@ant-design/icons'
 import { buildBlogZip, generateHtmlByTemplate } from '../utils/generator'
 import { parseMarkdownFiles, type Article } from '../utils/markdown'
 import ThemePanel, { type ThemeTokens } from '../components/ThemePanel'
+import AIBlogGenerator from '../components/AIBlogGenerator'
 
 type TemplateMeta = {
   id: string
@@ -24,6 +25,7 @@ export default function TemplatesPage() {
   const [form] = Form.useForm()
   const [articles, setArticles] = useState<Article[]>([])
   const [theme, setTheme] = useState<Partial<ThemeTokens> | undefined>()
+  const [activeTab, setActiveTab] = useState('templates')
 
   const previewUrl = useMemo(() => {
     return currentTemplate ? `/preview/${currentTemplate.id}` : ''
@@ -48,24 +50,49 @@ export default function TemplatesPage() {
     }
   }
 
+  const handleAIDownload = async (zipBlob: Blob, filename: string) => {
+    const { saveAs } = await import('file-saver')
+    saveAs(zipBlob, filename)
+    message.success('博客ZIP已生成并下载')
+  }
+
   return (
     <>
-      <Row gutter={[16, 16]}>
-        {TEMPLATES.map((tpl) => (
-          <Col key={tpl.id} xs={24} sm={12} md={8}>
-            <Card
-              title={tpl.name}
-              extra={<Space>{tpl.tags.map((t) => <Tag key={t}>{t}</Tag>)}</Space>}
-              actions={[
-                <Button type="link" icon={<EyeOutlined />} onClick={() => { setCurrentTemplate(tpl); setModalOpen(true) }}>预览/生成</Button>,
-                <Button type="link" icon={<ThunderboltOutlined />} onClick={() => { setCurrentTemplate(tpl); setModalOpen(true) }}>立即生成</Button>
-              ]}
-            >
-              <Typography.Paragraph type="secondary">{tpl.description}</Typography.Paragraph>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      <Tabs
+        activeKey={activeTab}
+        onChange={setActiveTab}
+        items={[
+          {
+            key: 'templates',
+            label: '模板生成',
+            icon: <EyeOutlined />,
+            children: (
+              <Row gutter={[16, 16]}>
+                {TEMPLATES.map((tpl) => (
+                  <Col key={tpl.id} xs={24} sm={12} md={8}>
+                    <Card
+                      title={tpl.name}
+                      extra={<Space>{tpl.tags.map((t) => <Tag key={t}>{t}</Tag>)}</Space>}
+                      actions={[
+                        <Button type="link" icon={<EyeOutlined />} onClick={() => { setCurrentTemplate(tpl); setModalOpen(true) }}>预览/生成</Button>,
+                        <Button type="link" icon={<ThunderboltOutlined />} onClick={() => { setCurrentTemplate(tpl); setModalOpen(true) }}>立即生成</Button>
+                      ]}
+                    >
+                      <Typography.Paragraph type="secondary">{tpl.description}</Typography.Paragraph>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            )
+          },
+          {
+            key: 'ai',
+            label: 'AI智能生成',
+            icon: <RobotOutlined />,
+            children: <AIBlogGenerator onDownload={handleAIDownload} />
+          }
+        ]}
+      />
 
       <Modal
         width={980}

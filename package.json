@@ -10,16 +10,22 @@
   },
   "dependencies": {
     "@ant-design/icons": "^5.3.7",
+    "@tailwindcss/typography": "^0.5.16",
     "antd": "^5.18.3",
     "file-saver": "^2.0.5",
+    "framer-motion": "^12.23.12",
     "jszip": "^3.10.1",
+    "lucide-react": "^0.543.0",
     "marked": "^16.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.26.2"
+    "react-router-dom": "^6.26.2",
+    "tailwindcss": "^4.1.13",
+    "tencentcloud-sdk-nodejs": "^4.1.113"
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.7",
+    "@types/node": "^24.3.1",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.0",
