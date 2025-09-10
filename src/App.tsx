@@ -50,7 +50,7 @@ export default function App() {
   const currentPath = location.pathname
 
   // 如果是首页，直接显示Landing Page
-  if (currentPath === '/') {
+  if (currentPath === '/' || currentPath === '/ai-build-blog-web/') {
     return <LandingPage />
   }
 
