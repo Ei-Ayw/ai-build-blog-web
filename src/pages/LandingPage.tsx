@@ -274,7 +274,7 @@ export default function LandingPage() {
                 描述你的想法，AI为你生成完整的博客内容。从标题到正文，从排版到发布，一切都在瞬间完成。
               </motion.p>
               
-              {/* CTA按钮 - 现代设计 */}
+              {/* CTA按钮 - 扁平设计 */}
               <motion.div
                 className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
                 initial={{ opacity: 0, y: 20 }}
@@ -283,26 +283,21 @@ export default function LandingPage() {
               >
                 <motion.button
                   onClick={() => navigate('/ai')}
-                  className="group relative px-8 py-4 bg-black text-white rounded-2xl font-medium text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
-                  whileHover={{ y: -2 }}
+                  className="px-8 py-4 bg-black text-white rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg flex items-center space-x-2"
+                  whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className="relative z-10 flex items-center">
-                    开始创作
-                    <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-800 to-black rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <span>开始创作</span>
+                  <ArrowRight className="w-5 h-5" />
                 </motion.button>
                 
                 <motion.button
-                  className="px-8 py-4 border-2 border-gray-200 text-gray-700 rounded-2xl font-medium text-lg transition-all duration-300 hover:border-gray-300 hover:bg-gray-50"
-                  whileHover={{ y: -2 }}
+                  className="px-8 py-4 border border-gray-300 text-gray-700 rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg flex items-center space-x-2"
+                  whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span className="flex items-center">
-                    <Play className="mr-2 w-5 h-5" />
-                    观看演示
-                  </span>
+                  <Play className="w-5 h-5" />
+                  <span>观看演示</span>
                 </motion.button>
               </motion.div>
               
@@ -425,35 +420,25 @@ export default function LandingPage() {
             {features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="group relative"
+                className="group"
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="relative p-8 bg-white border border-gray-100 rounded-3xl transition-all duration-500 group-hover:border-gray-200 group-hover:shadow-xl group-hover:-translate-y-2">
-                  {/* 背景装饰 */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-50/50 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
+                <div className="p-6 bg-white rounded-2xl shadow transition-all duration-300 group-hover:shadow-lg">
                   {/* 图标 */}
-                  <div className="relative w-16 h-16 bg-black rounded-2xl flex items-center justify-center text-white mb-6 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center text-white mb-4">
                     {feature.icon}
                   </div>
                   
                   {/* 内容 */}
-                  <div className="relative">
-                    <h3 className="text-2xl font-bold text-black mb-4 group-hover:text-gray-700 transition-colors">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed font-light">
-                      {feature.description}
-                    </p>
-                  </div>
-                  
-                  {/* 悬停效果 */}
-                  <div className="absolute bottom-6 right-6 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:translate-x-1">
-                    <ArrowRight className="w-4 h-4 text-gray-600" />
-                  </div>
+                  <h3 className="text-xl font-bold text-black mb-3">
+                    {feature.title}
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    {feature.description}
+                  </p>
                 </div>
               </motion.div>
             ))}
@@ -488,7 +473,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <Card className="h-full" padding="lg">
+                <div className="p-6 bg-white rounded-2xl shadow">
                   <div className="flex items-center mb-4">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -506,7 +491,7 @@ export default function LandingPage() {
                       <div className="text-sm text-gray-500">{testimonial.role}</div>
                     </div>
                   </div>
-                </Card>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -543,12 +528,12 @@ export default function LandingPage() {
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-gradient-to-r from-teal-500 to-teal-600 text-white px-4 py-1 rounded-full text-sm font-medium">
+                    <div className="bg-black text-white px-4 py-1 rounded-2xl text-sm font-medium">
                       最受欢迎
                     </div>
                   </div>
                 )}
-                <Card className={`h-full ${plan.popular ? 'ring-2 ring-teal-500' : ''}`} padding="lg">
+                <div className={`p-6 bg-white rounded-2xl shadow h-full ${plan.popular ? 'ring-2 ring-black' : ''}`}>
                   <div className="text-center mb-8">
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
                     <p className="text-gray-600 mb-4">{plan.description}</p>
@@ -567,14 +552,16 @@ export default function LandingPage() {
                     ))}
                   </ul>
                   
-                  <Button
-                    variant={plan.popular ? 'primary' : 'secondary'}
-                    fullWidth
-                    size="lg"
+                  <button
+                    className={`w-full px-6 py-3 rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg ${
+                      plan.popular 
+                        ? 'bg-black text-white' 
+                        : 'border border-gray-300 text-gray-700 hover:border-gray-400'
+                    }`}
                   >
                     {plan.cta}
-                  </Button>
-                </Card>
+                  </button>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -608,10 +595,10 @@ export default function LandingPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <Card padding="lg">
+                <div className="p-6 bg-white rounded-2xl shadow">
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
                   <p className="text-gray-600">{faq.answer}</p>
-                </Card>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -634,22 +621,22 @@ export default function LandingPage() {
               立即注册，体验AI驱动的博客生成工具
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <Button
-                variant="primary"
-                size="xl"
-                icon={<ArrowRight size={20} />}
-                className="w-full sm:w-auto"
+              <motion.button
                 onClick={() => navigate('/ai')}
+                className="px-8 py-4 bg-black text-white rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg flex items-center space-x-2"
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.98 }}
               >
-                免费开始使用
-              </Button>
-              <Button
-                variant="secondary"
-                size="xl"
-                className="w-full sm:w-auto"
+                <span>免费开始使用</span>
+                <ArrowRight size={20} />
+              </motion.button>
+              <motion.button
+                className="px-8 py-4 border border-gray-300 text-gray-700 rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg"
+                whileHover={{ y: -1 }}
+                whileTap={{ scale: 0.98 }}
               >
                 联系销售
-              </Button>
+              </motion.button>
             </div>
           </motion.div>
         </div>
