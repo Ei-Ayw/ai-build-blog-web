@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, useLocation } from 'react-router-dom'
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { Bot, Sparkles, Zap } from 'lucide-react'
 import TemplatesPage from './pages/TemplatesPage'
@@ -39,6 +39,7 @@ const navigationItems = [
 
 export default function App() {
   const location = useLocation()
+  const navigate = useNavigate()
   const currentPath = location.pathname
 
   return (
@@ -75,7 +76,7 @@ export default function App() {
                   key={item.key}
                   variant={currentPath === item.path ? 'primary' : 'ghost'}
                   size="sm"
-                  onClick={() => window.location.href = item.path}
+                  onClick={() => navigate(item.path)}
                   icon={item.icon}
                   className={currentPath === item.path ? 'bg-gradient-to-r from-purple-500 to-blue-500' : ''}
                 >
