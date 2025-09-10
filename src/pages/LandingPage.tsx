@@ -331,36 +331,36 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 产品演示区域 */}
-      <section className="py-20 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
+      {/* 产品演示区域 - 21st.dev风格 */}
+      <section className="py-32 px-6 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              简单三步，生成专业博客
+            <h2 className="text-5xl md:text-6xl font-black text-black mb-6 leading-tight">
+              简单三步
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              无需复杂操作，只需描述您的需求，AI将为您生成完整的博客内容
+            <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light">
+              无需复杂操作，只需描述你的需求，AI为你生成完整的博客内容
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
                 step: "01",
                 title: "描述需求",
-                description: "简单描述您想要创建的博客主题和风格",
+                description: "简单描述你想要创建的博客主题和风格",
                 icon: <FileText className="w-8 h-8" />
               },
               {
                 step: "02", 
                 title: "AI生成",
-                description: "我们的AI将为您生成完整的博客内容",
+                description: "我们的AI将为你生成完整的博客内容",
                 icon: <Bot className="w-8 h-8" />
               },
               {
@@ -372,18 +372,31 @@ export default function LandingPage() {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                className="text-center"
-                initial={{ opacity: 0, y: 30 }}
+                className="group text-center"
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-teal-500 to-teal-600 rounded-2xl flex items-center justify-center text-white mx-auto mb-6 shadow-lg">
-                  {item.icon}
+                <div className="relative">
+                  {/* 步骤编号 */}
+                  <div className="text-6xl font-black text-gray-200 mb-4 group-hover:text-gray-300 transition-colors">
+                    {item.step}
+                  </div>
+                  
+                  {/* 图标 */}
+                  <div className="w-20 h-20 bg-black rounded-3xl flex items-center justify-center text-white mx-auto mb-8 group-hover:scale-110 transition-transform duration-300">
+                    {item.icon}
+                  </div>
+                  
+                  {/* 内容 */}
+                  <h3 className="text-2xl font-bold text-black mb-4 group-hover:text-gray-700 transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 font-light leading-relaxed">
+                    {item.description}
+                  </p>
                 </div>
-                <div className="text-2xl font-bold text-teal-600 mb-2">{item.step}</div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{item.title}</h3>
-                <p className="text-gray-600">{item.description}</p>
               </motion.div>
             ))}
           </div>
