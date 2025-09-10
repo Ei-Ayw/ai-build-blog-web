@@ -59,12 +59,12 @@
   --gradient-secondary: linear-gradient(135deg, var(--color-gray-100) 0%, var(--color-gray-200) 100%);
   --gradient-subtle: linear-gradient(135deg, rgba(20, 184, 166, 0.1) 0%, rgba(20, 184, 166, 0.05) 100%);
   
-  /* 圆角系统 */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-2xl: 20px;
+  /* 圆角系统 - 参考繁星点点网站风格 */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
   --radius-full: 9999px;
   
   /* 间距系统 */
@@ -142,7 +142,7 @@ body {
   font-weight: var(--font-weight-medium);
   line-height: 1;
   border: 1px solid transparent;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
@@ -160,17 +160,17 @@ body {
 .btn-saas--primary {
   background: var(--gradient-primary);
   color: var(--text-inverse);
-  box-shadow: none;
+  box-shadow: var(--shadow-xs);
 }
 
 .btn-saas--primary:hover {
   transform: translateY(-1px);
-  box-shadow: none;
+  box-shadow: var(--shadow-xs);
 }
 
 .btn-saas--primary:active {
   transform: translateY(0);
-  box-shadow: none;
+  box-shadow: var(--shadow-xs);
 }
 
 /* 次要按钮 */
@@ -185,7 +185,7 @@ body {
   background: var(--bg-secondary);
   border-color: var(--border-medium);
   transform: translateY(-1px);
-  box-shadow: none;
+  box-shadow: var(--shadow-xs);
 }
 
 /* 幽灵按钮 */
@@ -220,15 +220,15 @@ body {
 .card-saas {
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  box-shadow: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
 .card-saas:hover {
   border-color: var(--border-medium);
-  box-shadow: none;
+  box-shadow: var(--shadow-xs);
   transform: translateY(-2px);
 }
 
@@ -237,7 +237,7 @@ body {
   background: var(--bg-overlay);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: none;
+  box-shadow: var(--shadow-xs);
 }
 
 /* 卡片内边距 */
@@ -262,7 +262,7 @@ body {
   color: var(--text-primary);
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
 }
@@ -296,7 +296,7 @@ body {
   color: var(--text-primary);
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
@@ -317,7 +317,7 @@ body {
 .tabs-saas {
   display: flex;
   background: var(--bg-secondary);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   padding: var(--space-1);
   border: 1px solid var(--border-light);
 }
@@ -331,7 +331,7 @@ body {
   color: var(--text-secondary);
   background: transparent;
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
@@ -345,7 +345,7 @@ body {
 .tab-saas--active {
   background: var(--bg-elevated);
   color: var(--text-primary);
-  box-shadow: none;
+  box-shadow: var(--shadow-xs);
 }
 
 /* 现代SaaS徽章样式 */
@@ -411,8 +411,8 @@ body {
   max-width: 500px;
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  box-shadow: none;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs);
   overflow: hidden;
 }
 

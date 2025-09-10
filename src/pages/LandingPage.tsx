@@ -160,7 +160,7 @@ export default function LandingPage() {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <div className="w-10 h-10 bg-black rounded-2xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-black rounded flex items-center justify-center">
                 <Bot size={22} className="text-white" />
               </div>
               <h1 className="text-xl font-bold text-black">BlogBuilder</h1>
@@ -178,7 +178,7 @@ export default function LandingPage() {
             <div className="hidden md:flex items-center space-x-3">
               <button 
                 onClick={() => navigate('/ai')} 
-                className="px-6 py-2.5 bg-black text-white rounded-2xl font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                className="px-6 py-2.5 bg-black text-white rounded font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-sm"
               >
                 开始使用
               </button>
@@ -283,7 +283,7 @@ export default function LandingPage() {
               >
                 <motion.button
                   onClick={() => navigate('/templates')}
-                  className="px-8 py-4 bg-black text-white rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg flex items-center space-x-2"
+                  className="px-8 py-4 bg-black text-white rounded font-medium text-lg transition-all duration-300 hover:shadow-sm flex items-center space-x-2"
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -292,7 +292,7 @@ export default function LandingPage() {
                 </motion.button>
                 
                 <motion.button
-                  className="px-8 py-4 border border-gray-300 text-gray-700 rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg flex items-center space-x-2"
+                  className="px-8 py-4 border border-gray-300 text-gray-700 rounded font-medium text-lg transition-all duration-300 hover:shadow-sm flex items-center space-x-2"
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -426,9 +426,9 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="p-6 bg-white rounded-2xl shadow transition-all duration-300 group-hover:shadow-lg">
+                <div className="p-6 bg-white rounded shadow transition-all duration-300 group-hover:shadow-sm">
                   {/* 图标 */}
-                  <div className="w-12 h-12 bg-black rounded-2xl flex items-center justify-center text-white mb-4">
+                  <div className="w-12 h-12 bg-black rounded flex items-center justify-center text-white mb-4">
                     {feature.icon}
                   </div>
                   
@@ -473,7 +473,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, delay: index * 0.2 }}
                 viewport={{ once: true }}
               >
-                <div className="p-6 bg-white rounded-2xl shadow">
+                <div className="p-6 bg-white rounded shadow">
                   <div className="flex items-center mb-4">
                     {[...Array(5)].map((_, i) => (
                       <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
@@ -528,12 +528,12 @@ export default function LandingPage() {
               >
                 {plan.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-black text-white px-4 py-1 rounded-2xl text-sm font-medium">
+                    <div className="bg-black text-white px-4 py-1 rounded text-sm font-medium">
                       最受欢迎
                     </div>
                   </div>
                 )}
-                <div className={`p-6 bg-white rounded-2xl shadow h-full ${plan.popular ? 'ring-2 ring-black' : ''}`}>
+                <div className={`p-6 bg-white rounded shadow h-full ${plan.popular ? 'ring-2 ring-black' : ''}`}>
                   <div className="text-center mb-8">
                     <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
                     <p className="text-gray-600 mb-4">{plan.description}</p>
@@ -553,7 +553,7 @@ export default function LandingPage() {
                   </ul>
                   
                   <button
-                    className={`w-full px-6 py-3 rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg ${
+                    className={`w-full px-6 py-3 rounded font-medium text-lg transition-all duration-300 hover:shadow-sm ${
                       plan.popular 
                         ? 'bg-black text-white' 
                         : 'border border-gray-300 text-gray-700 hover:border-gray-400'
@@ -595,7 +595,7 @@ export default function LandingPage() {
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="p-6 bg-white rounded-2xl shadow">
+                <div className="p-6 bg-white rounded shadow">
                   <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
                   <p className="text-gray-600">{faq.answer}</p>
                 </div>
@@ -623,7 +623,7 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
               <motion.button
                 onClick={() => navigate('/ai')}
-                className="px-8 py-4 bg-black text-white rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg flex items-center space-x-2"
+                className="px-8 py-4 bg-black text-white rounded font-medium text-lg transition-all duration-300 hover:shadow-sm flex items-center space-x-2"
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -631,7 +631,7 @@ export default function LandingPage() {
                 <ArrowRight size={20} />
               </motion.button>
               <motion.button
-                className="px-8 py-4 border border-gray-300 text-gray-700 rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg"
+                className="px-8 py-4 border border-gray-300 text-gray-700 rounded font-medium text-lg transition-all duration-300 hover:shadow-sm"
                 whileHover={{ y: -1 }}
                 whileTap={{ scale: 0.98 }}
               >

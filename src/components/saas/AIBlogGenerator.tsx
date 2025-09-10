@@ -214,7 +214,7 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="bg-white rounded-md  p-6">
+            <div className="bg-white rounded shadow p-6">
               <div className="space-y-8">
                 <div>
                   <h2 className="text-3xl font-black text-black mb-3">
@@ -228,7 +228,7 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                 {/* 选中的模板信息 */}
                 {selectedTemplate && (
                   <motion.div
-                    className="p-4 bg-gray-50 rounded-md border border-gray-200"
+                    className="p-4 bg-gray-50 rounded border border-gray-200"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
@@ -241,7 +241,7 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                     </div>
                     <div className="flex items-center space-x-4">
                       <div
-                        className="w-12 h-12 rounded-md flex items-center justify-center text-white text-xl font-bold"
+                        className="w-12 h-12 rounded flex items-center justify-center text-white text-xl font-bold"
                         style={{ backgroundColor: selectedTemplate.style.colors.primary }}
                       >
                         {selectedTemplate.name.charAt(0)}
@@ -318,7 +318,7 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                   <motion.button
                     onClick={handleAIGenerate}
                     disabled={loading}
-                    className="flex-1 px-8 py-4 bg-black text-white rounded-md font-medium text-lg transition-all duration-300  disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
+                    className="flex-1 px-8 py-4 bg-black text-white rounded font-medium text-lg transition-all duration-300 hover:shadow-sm disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
                     whileHover={{ y: -1 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -344,7 +344,7 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                         author: '技术爱好者'
                       })
                     }}
-                    className="px-6 py-4 border border-gray-300 text-gray-700 rounded-md font-medium text-lg transition-all duration-300  flex items-center space-x-2"
+                    className="px-6 py-4 border border-gray-300 text-gray-700 rounded font-medium text-lg transition-all duration-300 hover:shadow-sm flex items-center space-x-2"
                     whileHover={{ y: -1 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -364,10 +364,10 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {generatedContent ? (
-              <div className="bg-white rounded-md  p-6">
+              <div className="bg-white rounded shadow p-6">
                 <div className="space-y-6">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 bg-black rounded-md flex items-center justify-center">
+                    <div className="w-10 h-10 bg-black rounded flex items-center justify-center">
                       <Check className="w-6 h-6 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-black">生成完成</h3>
@@ -414,7 +414,7 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                   <div className="pt-4 border-t border-gray-200">
                     <motion.button
                       onClick={handleGenerateAndDownload}
-                      className="w-full px-6 py-4 bg-black text-white rounded-md font-medium text-lg transition-all duration-300  flex items-center justify-center space-x-2"
+                      className="w-full px-6 py-4 bg-black text-white rounded font-medium text-lg transition-all duration-300 hover:shadow-sm flex items-center justify-center space-x-2"
                       whileHover={{ y: -1 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -425,7 +425,7 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                 </div>
               </div>
             ) : (
-              <div className="bg-white rounded-md  p-6">
+              <div className="bg-white rounded shadow p-6">
                 <div className="text-center py-8">
                   <div className="w-16 h-16 bg-gray-100 rounded-3xl flex items-center justify-center mx-auto mb-6">
                     <Sparkles className="w-8 h-8 text-gray-400" />
@@ -448,7 +448,7 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <div className="bg-white rounded-md  p-6">
+            <div className="bg-white rounded shadow p-6">
               <div className="space-y-8">
                 <div>
                   <h3 className="text-3xl font-black text-black mb-3">生成的文章列表</h3>
@@ -459,7 +459,7 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                   {generatedContent.articles.map((article, index) => (
                     <motion.div
                       key={index}
-                      className="group p-4 bg-gray-50 rounded-md   transition-all duration-300"
+                      className="group p-4 bg-gray-50 rounded   transition-all duration-300"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}

@@ -74,7 +74,7 @@ export default function App() {
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <div className="w-10 h-10 bg-black rounded-md flex items-center justify-center">
+              <div className="w-10 h-10 bg-black rounded flex items-center justify-center">
                 <Bot size={22} className="text-white" />
               </div>
               <h1 className="text-xl font-bold text-black">BlogBuilder</h1>
@@ -87,7 +87,7 @@ export default function App() {
                   key={item.key}
                   onClick={() => navigate(item.path)}
                   className={`
-                    px-4 py-2 rounded-md font-medium text-sm transition-all duration-300 flex items-center space-x-2
+                    px-4 py-2 rounded font-medium text-sm transition-all duration-300 flex items-center space-x-2
                     ${currentPath === item.path 
                       ? 'bg-black text-white ' 
                       : 'text-gray-600 hover:text-black hover:bg-gray-100'

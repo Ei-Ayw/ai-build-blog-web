@@ -86,7 +86,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
       onClick={onClose}
     >
       <motion.div
-        className={`bg-white rounded-md -2xl overflow-hidden ${
+        className={`bg-white rounded -2xl overflow-hidden ${
           isFullscreen ? 'w-full h-full rounded-none' : 'w-full max-w-6xl h-[90vh]'
         }`}
         initial={{ scale: 0.9, opacity: 0 }}
@@ -99,7 +99,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
         <div className="flex items-center justify-between p-6 border-b border-gray-200 bg-white">
           <div className="flex items-center space-x-4">
             <div
-              className="w-12 h-12 rounded-md flex items-center justify-center text-white text-xl font-bold"
+              className="w-12 h-12 rounded flex items-center justify-center text-white text-xl font-bold"
               style={{ backgroundColor: template.style.colors.primary }}
             >
               {template.name.charAt(0)}
@@ -232,7 +232,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
                   <div className="flex items-center justify-between py-6">
                     <div className="flex items-center space-x-3">
                       <div
-                        className="w-10 h-10 rounded-md flex items-center justify-center text-white font-bold"
+                        className="w-10 h-10 rounded flex items-center justify-center text-white font-bold"
                         style={{ backgroundColor: template.style.colors.primary }}
                       >
                         B
@@ -317,13 +317,13 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
           <div className="flex space-x-3">
             <button
               onClick={onClose}
-              className="px-6 py-2 border border-gray-300 text-gray-700 rounded-md font-medium  transition-all duration-300"
+              className="px-6 py-2 border border-gray-300 text-gray-700 rounded font-medium  transition-all duration-300"
             >
               取消
             </button>
             <button
               onClick={() => onSelect(template)}
-              className="px-6 py-2 bg-black text-white rounded-md font-medium  transition-all duration-300"
+              className="px-6 py-2 bg-black text-white rounded font-medium  transition-all duration-300"
             >
               使用此模板
             </button>
