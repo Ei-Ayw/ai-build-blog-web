@@ -1,0 +1,217 @@
+/* 模板预览样式 */
+.template-preview {
+  font-family: var(--body-font, 'Noto Sans JP', sans-serif);
+  background-color: var(--background-color, #ffffff);
+  color: var(--text-color, #333333);
+  line-height: 1.6;
+}
+
+.template-preview .container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* 头部样式 */
+.template-header {
+  border-bottom: 1px solid var(--secondary-color, #f0f0f0);
+  background-color: var(--background-color, #ffffff);
+}
+
+/* 主要内容区域 */
+.template-main {
+  padding: var(--spacing, 2rem) 0;
+}
+
+/* 文章样式 */
+.template-article {
+  max-width: 100%;
+}
+
+.article-header {
+  margin-bottom: var(--spacing, 2rem);
+  padding-bottom: var(--spacing, 1.5rem);
+  border-bottom: 1px solid var(--secondary-color, #f0f0f0);
+}
+
+.article-title {
+  font-family: var(--heading-font, 'Noto Sans JP', sans-serif);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  color: var(--text-color, #333333);
+}
+
+.article-meta {
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+.article-excerpt {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.article-content {
+  font-size: var(--font-size, 16px);
+  line-height: 1.8;
+}
+
+.article-content h2 {
+  font-family: var(--heading-font, 'Noto Sans JP', sans-serif);
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem 0;
+  color: var(--text-color, #333333);
+}
+
+.article-content h3 {
+  font-family: var(--heading-font, 'Noto Sans JP', sans-serif);
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 1.5rem 0 0.8rem 0;
+  color: var(--text-color, #333333);
+}
+
+.article-content p {
+  margin-bottom: 1.2rem;
+  color: var(--text-color, #333333);
+}
+
+.article-footer {
+  margin-top: var(--spacing, 2rem);
+  padding-top: var(--spacing, 1.5rem);
+  border-top: 1px solid var(--secondary-color, #f0f0f0);
+}
+
+/* 布局变体 */
+.minimal-layout .article-title {
+  font-size: 3rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+.minimal-layout .article-content {
+  font-size: 1.1rem;
+  line-height: 1.9;
+}
+
+.minimal-layout .container {
+  max-width: 600px;
+}
+
+.modern-layout .article-title {
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.modern-layout .article-content h2 {
+  color: var(--primary-color, #000000);
+  border-left: 4px solid var(--accent-color, #0066cc);
+  padding-left: 1rem;
+}
+
+.classic-layout .article-title {
+  font-size: 2.8rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.classic-layout .article-meta {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.classic-layout .article-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.creative-layout .article-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color, #000000), var(--accent-color, #0066cc));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.creative-layout .article-content h2 {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.creative-layout .article-content h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1rem;
+  height: 1rem;
+  background-color: var(--accent-color, #0066cc);
+  border-radius: 50%;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .template-preview .container {
+    padding: 0 1rem;
+  }
+  
+  .article-title {
+    font-size: 2rem !important;
+  }
+  
+  .article-content {
+    font-size: 16px !important;
+  }
+  
+  .template-header .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .template-header nav {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+/* 特殊效果 */
+.template-preview .article-content h2:hover {
+  color: var(--accent-color, #0066cc);
+  transition: color 0.3s ease;
+}
+
+.template-preview .article-content p:first-of-type::first-letter {
+  font-size: 3rem;
+  font-weight: 700;
+  float: left;
+  line-height: 1;
+  margin: 0 0.5rem 0 0;
+  color: var(--primary-color, #000000);
+}
+
+/* 滚动条样式 */
+.template-preview ::-webkit-scrollbar {
+  width: 6px;
+}
+
+.template-preview ::-webkit-scrollbar-track {
+  background: var(--secondary-color, #f0f0f0);
+}
+
+.template-preview ::-webkit-scrollbar-thumb {
+  background: var(--primary-color, #000000);
+  border-radius: 3px;
+}
+
+.template-preview ::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color, #0066cc);
+}

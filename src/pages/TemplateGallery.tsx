@@ -13,12 +13,16 @@ import {
   Tag
 } from 'lucide-react';
 import { blogTemplates, getTemplatesByCategory, getCategories, BlogTemplate } from '../data/templates';
+import TemplatePreview from '../components/TemplatePreview';
+import '../styles/template-preview.css';
 
 const TemplateGallery: React.FC = () => {
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedTemplate, setSelectedTemplate] = useState<BlogTemplate | null>(null);
+  const [previewTemplate, setPreviewTemplate] = useState<BlogTemplate | null>(null);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const categories = getCategories();
   const filteredTemplates = useMemo(() => {
@@ -44,6 +48,20 @@ const TemplateGallery: React.FC = () => {
         templateStyle: template.style 
       } 
     });
+  };
+
+  const handlePreviewTemplate = (template: BlogTemplate) => {
+    setPreviewTemplate(template);
+    setIsFullscreen(false);
+  };
+
+  const handleClosePreview = () => {
+    setPreviewTemplate(null);
+    setIsFullscreen(false);
+  };
+
+  const handleToggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
   };
 
   return (
@@ -155,14 +173,26 @@ const TemplateGallery: React.FC = () => {
                 
                 {/* 悬停效果 */}
                 <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
-                  <motion.button
-                    className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-white text-black rounded-2xl font-medium transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Eye className="w-4 h-4 inline mr-2" />
-                    预览
-                  </motion.button>
+                  <div className="flex space-x-2">
+                    <motion.button
+                      onClick={() => handlePreviewTemplate(template)}
+                      className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-white text-black rounded-2xl font-medium transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <Eye className="w-4 h-4 inline mr-2" />
+                      预览
+                    </motion.button>
+                    <motion.button
+                      onClick={() => handleTemplateSelect(template)}
+                      className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-black text-white rounded-2xl font-medium transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      <ArrowRight className="w-4 h-4 inline mr-2" />
+                      使用
+                    </motion.button>
+                  </div>
                 </div>
               </div>
 
@@ -254,6 +284,18 @@ const TemplateGallery: React.FC = () => {
           </motion.div>
         )}
       </div>
+
+      {/* 模板预览模态框 */}
+      {previewTemplate && (
+        <TemplatePreview
+          template={previewTemplate}
+          isOpen={!!previewTemplate}
+          onClose={handleClosePreview}
+          onSelect={handleTemplateSelect}
+          isFullscreen={isFullscreen}
+          onToggleFullscreen={handleToggleFullscreen}
+        />
+      )}
     </div>
   );
 };
