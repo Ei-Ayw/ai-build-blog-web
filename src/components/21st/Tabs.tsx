@@ -59,7 +59,7 @@ export default function Tabs({
         
         {/* Active Tab Indicator */}
         <motion.div
-          className="absolute bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg shadow-lg"
+          className="absolute bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg "
           style={{
             height: '40px',
             zIndex: -1

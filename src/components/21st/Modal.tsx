@@ -51,7 +51,7 @@ export default function Modal({
           <motion.div
             className={`
               relative w-full ${sizeClasses[size]} bg-gray-900/95 backdrop-blur-xl
-              border border-gray-600 rounded-2xl shadow-2xl overflow-hidden
+              border border-gray-600 rounded-2xl  overflow-hidden
               ${className}
             `}
             initial={{ opacity: 0, scale: 0.9, y: 20 }}

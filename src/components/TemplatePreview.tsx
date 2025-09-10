@@ -49,7 +49,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
           excerpt: "随着人工智能技术的快速发展，AI在内容创作领域展现出了巨大的潜力。本文将深入探讨AI如何改变我们的创作方式，以及未来可能的发展趋势。",
           content: `
             <div style="text-align: center; margin: 20px 0;">
-              <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop" alt="AI人工智能" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+              <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop" alt="AI人工智能" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; " />
             </div>
             
             <h2>引言</h2>
@@ -118,7 +118,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
           excerpt: "在数字化浪潮中，企业如何通过技术手段实现业务转型，提升竞争力，构建可持续发展的商业生态。",
           content: `
             <div style="text-align: center; margin: 20px 0;">
-              <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=400&fit=crop" alt="企业数字化转型" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+              <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=400&fit=crop" alt="企业数字化转型" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; " />
             </div>
             
             <h2>数字化转型的重要性</h2>
@@ -177,7 +177,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
           excerpt: "探索二次元文化如何从小众爱好发展成为影响全球的文化现象，以及它对现代社会的深远影响。",
           content: `
             <div style="text-align: center; margin: 20px 0;">
-              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=400&fit=crop" alt="二次元文化" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=800&h=400&fit=crop" alt="二次元文化" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; " />
             </div>
             
             <h2>二次元文化的起源</h2>
@@ -236,7 +236,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
           excerpt: "探索摄影艺术如何与设计理念相结合，创造出具有强烈视觉冲击力的作品，传达深刻的情感与思想。",
           content: `
             <div style="text-align: center; margin: 20px 0;">
-              <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=800&h=400&fit=crop" alt="摄影艺术" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+              <img src="https://images.unsplash.com/photo-1606983340126-99ab4feaa64a?w=800&h=400&fit=crop" alt="摄影艺术" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; " />
             </div>
             
             <h2>摄影的艺术性</h2>
@@ -302,7 +302,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
           excerpt: "在忙碌的现代生活中，如何通过慢生活的理念，重新发现生活的美好，找到内心的平衡与宁静。",
           content: `
             <div style="text-align: center; margin: 20px 0;">
-              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop" alt="慢生活" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);" />
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop" alt="慢生活" style="width: 100%; max-width: 600px; height: 300px; object-fit: cover; border-radius: 8px; " />
             </div>
             
             <h2>慢生活的理念</h2>
@@ -420,7 +420,7 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
       onClick={onClose}
     >
       <motion.div
-        className={`bg-white rounded shadow-2xl overflow-hidden ${
+        className={`bg-white rounded  overflow-hidden ${
           isFullscreen ? 'w-full h-full rounded-none' : 'w-full max-w-7xl h-[90vh]'
         }`}
         initial={{ scale: 0.9, opacity: 0 }}
@@ -692,13 +692,13 @@ const TemplatePreview: React.FC<TemplatePreviewProps> = ({
           <div className="flex space-x-3">
             <button
               onClick={onClose}
-              className="px-6 py-2 border border-gray-300 text-gray-700 rounded font-medium hover:shadow-sm transition-all duration-300"
+              className="px-6 py-2 border border-gray-300 text-gray-700 rounded font-medium  transition-all duration-300"
             >
               取消
             </button>
             <button
               onClick={() => onSelect(template)}
-              className="px-6 py-2 bg-black text-white rounded font-medium hover:shadow-sm transition-all duration-300"
+              className="px-6 py-2 bg-black text-white rounded font-medium  transition-all duration-300"
             >
               使用此模板
             </button>

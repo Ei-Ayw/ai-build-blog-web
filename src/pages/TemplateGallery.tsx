@@ -250,7 +250,7 @@ const TemplateGallery: React.FC = () => {
                   <h3 className="text-lg font-semibold text-gray-800">网站首页预览</h3>
                   <button
                     onClick={() => handlePreviewTemplate(template)}
-                    className="px-4 py-2 bg-black text-white rounded text-sm font-medium hover:shadow-sm transition-all duration-300 flex items-center space-x-2"
+                    className="px-4 py-2 bg-black text-white rounded text-sm font-medium hover: transition-all duration-300 flex items-center space-x-2"
                   >
                     <Eye className="w-4 h-4" />
                     <span>查看完整效果</span>
@@ -258,7 +258,7 @@ const TemplateGallery: React.FC = () => {
                 </div>
                 
                 {/* 模拟的博客首页 */}
-                <div className="bg-white rounded border shadow-sm overflow-hidden">
+                <div className="bg-white rounded border  overflow-hidden">
                   {/* 博客头部 */}
                   <div className="border-b border-gray-200 px-6 py-4">
                     <div className="flex items-center justify-between">
@@ -375,7 +375,7 @@ const TemplateGallery: React.FC = () => {
                 <div className="flex space-x-3">
                   <motion.button
                     onClick={() => handleTemplateSelect(template)}
-                    className="px-6 py-2 bg-black text-white rounded font-medium hover:shadow-sm transition-all duration-300 flex items-center space-x-2"
+                    className="px-6 py-2 bg-black text-white rounded font-medium hover: transition-all duration-300 flex items-center space-x-2"
                     whileHover={{ y: -1 }}
                     whileTap={{ scale: 0.98 }}
                   >
@@ -406,7 +406,7 @@ const TemplateGallery: React.FC = () => {
                 setSearchTerm('');
                 setSelectedCategory('all');
               }}
-              className="px-6 py-3 bg-black text-white rounded font-medium hover:shadow-sm transition-all duration-300"
+              className="px-6 py-3 bg-black text-white rounded font-medium hover: transition-all duration-300"
             >
               重置筛选
             </button>

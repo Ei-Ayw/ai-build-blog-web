@@ -19,3 +19,50 @@ body {
     @apply border-border; }
   body {
     @apply bg-background text-foreground; } }
+
+@layer utilities {
+  .aurora-effect {
+    --white-gradient: repeating-linear-gradient(100deg, var(--white) 0%, var(--white) 7%, transparent 10%, transparent 12%, var(--white) 16%);
+    --dark-gradient: repeating-linear-gradient(100deg, var(--black) 0%, var(--black) 7%, transparent 10%, transparent 12%, var(--black) 16%);
+    --aurora: repeating-linear-gradient(100deg, #3b82f6 10%, #8b5cf6 15%, #06b6d4 20%, #a855f7 25%, #3b82f6 30%);
+    background-image: var(--white-gradient), var(--aurora);
+    background-size: 300%, 200%;
+    background-position: 50% 50%, 50% 50%;
+    filter: blur(10px);
+    animation: aurora 60s linear infinite;
+  }
+  
+  .dark .aurora-effect {
+    background-image: var(--dark-gradient), var(--aurora);
+  }
+  
+  .aurora-effect::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--white-gradient), var(--aurora);
+    background-size: 200%, 100%;
+    animation: aurora 60s linear infinite;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+  }
+  
+  .dark .aurora-effect::after {
+    background-image: var(--dark-gradient), var(--aurora);
+  }
+  
+  @keyframes aurora {
+    0% {
+      background-position: 50% 50%, 50% 50%;
+    }
+    33% {
+      background-position: 350% 50%, 350% 50%;
+    }
+    66% {
+      background-position: 750% 50%, 750% 50%;
+    }
+    100% {
+      background-position: 50% 50%, 50% 50%;
+    }
+  }
+}

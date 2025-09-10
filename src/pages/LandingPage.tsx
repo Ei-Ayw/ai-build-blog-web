@@ -170,16 +170,16 @@ export default function LandingPage() {
 
             {/* 桌面导航 */}
             <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
-              <a href="#features" className="text-white hover:text-white/80 transition-colors font-medium text-sm lg:text-base drop-shadow-lg">Features</a>
-              <a href="#pricing" className="text-white hover:text-white/80 transition-colors font-medium text-sm lg:text-base drop-shadow-lg">Pricing</a>
-              <a href="#templates" className="text-white hover:text-white/80 transition-colors font-medium text-sm lg:text-base drop-shadow-lg">Templates</a>
+              <a href="#features" className="text-white hover:text-white/80 transition-colors font-medium text-sm lg:text-base ">Features</a>
+              <a href="#pricing" className="text-white hover:text-white/80 transition-colors font-medium text-sm lg:text-base ">Pricing</a>
+              <a href="#templates" className="text-white hover:text-white/80 transition-colors font-medium text-sm lg:text-base ">Templates</a>
             </div>
 
             {/* CTA按钮 */}
             <div className="hidden md:flex items-center space-x-3">
                 <button 
                   onClick={() => navigate('/ai-build-blog-web/ai')} 
-                  className="bg-white text-black rounded-full px-4 sm:px-6 py-2 font-medium text-sm transition-all duration-300 hover:bg-white/90 drop-shadow-lg"
+                  className="bg-white text-black rounded-full px-4 sm:px-6 py-2 font-medium text-sm transition-all duration-300 hover:bg-white/90 "
                 >
                   Get Started
                 </button>
@@ -203,18 +203,18 @@ export default function LandingPage() {
               exit={{ opacity: 0, height: 0 }}
             >
               <div className="flex flex-col space-y-4">
-                <a href="#features" className="text-white hover:text-white/80 text-sm drop-shadow-lg">Features</a>
-                <a href="#pricing" className="text-white hover:text-white/80 text-sm drop-shadow-lg">Pricing</a>
-                <a href="#templates" className="text-white hover:text-white/80 text-sm drop-shadow-lg">Templates</a>
+                <a href="#features" className="text-white hover:text-white/80 text-sm ">Features</a>
+                <a href="#pricing" className="text-white hover:text-white/80 text-sm ">Pricing</a>
+                <a href="#templates" className="text-white hover:text-white/80 text-sm ">Templates</a>
                 <button 
                   onClick={() => navigate('/ai-build-blog-web/ai')} 
-                  className="text-white hover:text-white/80 text-left text-sm drop-shadow-lg"
+                  className="text-white hover:text-white/80 text-left text-sm "
                 >
                   Get Started
                 </button>
                 <div className="flex space-x-3 pt-4">
-                  <button className="flex-1 px-4 py-2 bg-transparent border border-white text-white rounded-xl text-sm drop-shadow-lg">Login</button>
-                  <button className="flex-1 px-4 py-2 bg-white text-black rounded-xl text-sm drop-shadow-lg">Free Trial</button>
+                  <button className="flex-1 px-4 py-2 bg-transparent border border-white text-white rounded-xl text-sm ">Login</button>
+                  <button className="flex-1 px-4 py-2 bg-white text-black rounded-xl text-sm ">Free Trial</button>
                 </div>
               </div>
             </motion.div>
@@ -237,8 +237,8 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
             >
-              <span className="block text-black drop-shadow-lg">Create Perfect Blogs</span>
-              <span className="block text-black drop-shadow-lg">
+              <span className="block text-black ">Create Perfect Blogs</span>
+              <span className="block text-black ">
                 In Seconds
               </span>
             </motion.h1>
@@ -250,8 +250,8 @@ export default function LandingPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.8 }}
             >
-              <p className="drop-shadow-lg mb-2 sm:mb-4 font-medium">Describe your ideas, AI generates complete blog content.</p>
-              <p className="drop-shadow-lg font-medium">From title to content, from layout to publish, everything happens in seconds.</p>
+              <p className=" mb-2 sm:mb-4 font-medium">Describe your ideas, AI generates complete blog content.</p>
+              <p className=" font-medium">From title to content, from layout to publish, everything happens in seconds.</p>
             </motion.div>
             
             {/* CTA按钮 - 响应式设计 */}
@@ -263,7 +263,7 @@ export default function LandingPage() {
             >
               <motion.button
                 onClick={() => navigate('/ai-build-blog-web/templates')}
-                className="w-full sm:w-auto bg-white text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white/90 drop-shadow-lg flex items-center justify-center space-x-2"
+                className="w-full sm:w-auto bg-white text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white/90  flex items-center justify-center space-x-2"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -272,7 +272,7 @@ export default function LandingPage() {
               </motion.button>
               
               <motion.button
-                className="w-full sm:w-auto bg-transparent border-2 border-black text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg transition-all duration-300 hover:bg-black hover:text-white drop-shadow-lg flex items-center justify-center space-x-2"
+                className="w-full sm:w-auto bg-transparent border-2 border-black text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg transition-all duration-300 hover:bg-black hover:text-white  flex items-center justify-center space-x-2"
                 whileHover={{ y: -2, scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
@@ -525,7 +525,7 @@ export default function LandingPage() {
             <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16 sm:mb-20">
               <motion.button
                 onClick={() => navigate('/ai-build-blog-web/ai')}
-                className="w-full sm:w-auto bg-white text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg lg:text-xl transition-all duration-300 hover:bg-white/90 drop-shadow-lg flex items-center justify-center space-x-2 sm:space-x-3"
+                className="w-full sm:w-auto bg-white text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg lg:text-xl transition-all duration-300 hover:bg-white/90  flex items-center justify-center space-x-2 sm:space-x-3"
                 whileHover={{ y: -3, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -534,7 +534,7 @@ export default function LandingPage() {
               </motion.button>
               <motion.button
                 onClick={() => navigate('/ai-build-blog-web/templates')}
-                className="w-full sm:w-auto bg-transparent border-2 border-white text-white rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg lg:text-xl transition-all duration-300 hover:bg-white hover:text-black drop-shadow-lg"
+                className="w-full sm:w-auto bg-transparent border-2 border-white text-white rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg lg:text-xl transition-all duration-300 hover:bg-white hover:text-black "
                 whileHover={{ y: -3, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

@@ -101,7 +101,7 @@ export default function Select({
         <AnimatePresence>
           {isOpen && (
             <motion.div
-              className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden"
+              className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl  overflow-hidden"
               initial={{ opacity: 0, y: -10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
