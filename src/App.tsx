@@ -10,7 +10,6 @@ import EnhancedBlogGenerator from './components/EnhancedBlogGenerator'
 import AIBlogGenerator from './components/saas/AIBlogGenerator'
 import AbstractBackground from './components/saas/AbstractBackground'
 import Button from './components/saas/Button'
-import './styles/saas-theme.css'
 
 const navigationItems = [
   { 

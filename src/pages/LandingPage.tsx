@@ -20,6 +20,8 @@ import {
 } from 'lucide-react'
 import Button from '../components/saas/Button'
 import Card from '../components/saas/Card'
+import { AuroraBackground } from '../components/ui/aurora-background'
+import { blogTemplates } from '../data/templates'
 
 export default function LandingPage() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -28,33 +30,33 @@ export default function LandingPage() {
   const features = [
     {
       icon: <Bot className="w-6 h-6" />,
-      title: "AI智能生成",
-      description: "基于先进的大语言模型，智能生成高质量博客内容，让创作变得简单高效。"
+      title: "AI Smart Generation",
+      description: "Based on advanced large language models, intelligently generate high-quality blog content, making creation simple and efficient."
     },
     {
       icon: <Zap className="w-6 h-6" />,
-      title: "一键生成",
-      description: "只需一句话描述，即可生成完整的博客文章，包含标题、内容、标签等。"
+      title: "One-Click Generation",
+      description: "Just describe in one sentence to generate complete blog articles, including titles, content, tags, etc."
     },
     {
       icon: <FileText className="w-6 h-6" />,
-      title: "多种模板",
-      description: "提供极简白、极夜黑、杂志风等多种精美模板，满足不同风格需求。"
+      title: "Multiple Templates",
+      description: "Provides various beautiful templates like minimal white, dark night, magazine style to meet different style needs."
     },
     {
       icon: <Download className="w-6 h-6" />,
-      title: "一键部署",
-      description: "生成完成后可直接下载ZIP文件，支持多种部署方式，快速上线。"
+      title: "One-Click Deploy",
+      description: "After generation, you can directly download ZIP files, support multiple deployment methods, go live quickly."
     },
     {
       icon: <Shield className="w-6 h-6" />,
-      title: "安全可靠",
-      description: "采用企业级安全标准，保护您的数据安全，支持私有化部署。"
+      title: "Secure & Reliable",
+      description: "Adopts enterprise-grade security standards, protects your data security, supports private deployment."
     },
     {
       icon: <Globe className="w-6 h-6" />,
-      title: "多语言支持",
-      description: "支持中英文内容生成，适应全球化内容创作需求。"
+      title: "Multi-Language Support",
+      description: "Supports Chinese and English content generation, adapting to global content creation needs."
     }
   ]
 
@@ -81,50 +83,50 @@ export default function LandingPage() {
 
   const pricingPlans = [
     {
-      name: "免费版",
-      price: "¥0",
-      period: "/月",
-      description: "适合个人用户和初学者",
+      name: "Free",
+      price: "$0",
+      period: "/month",
+      description: "Perfect for individuals and beginners",
       features: [
-        "每月10篇博客生成",
-        "基础模板选择",
-        "标准AI模型",
-        "社区支持"
+        "10 blog generations per month",
+        "Basic template selection",
+        "Standard AI model",
+        "Community support"
       ],
-      cta: "开始免费使用",
+      cta: "Start Free",
       popular: false
     },
     {
-      name: "专业版",
-      price: "¥99",
-      period: "/月",
-      description: "适合内容创作者和小团队",
+      name: "Pro",
+      price: "$29",
+      period: "/month",
+      description: "Perfect for content creators and small teams",
       features: [
-        "每月100篇博客生成",
-        "所有模板和主题",
-        "高级AI模型",
-        "优先技术支持",
-        "自定义品牌设置",
-        "批量生成功能"
+        "100 blog generations per month",
+        "All templates and themes",
+        "Advanced AI model",
+        "Priority technical support",
+        "Custom brand settings",
+        "Batch generation features"
       ],
-      cta: "升级到专业版",
+      cta: "Upgrade to Pro",
       popular: true
     },
     {
-      name: "企业版",
-      price: "¥299",
-      period: "/月",
-      description: "适合大型团队和企业",
+      name: "Enterprise",
+      price: "$99",
+      period: "/month",
+      description: "Perfect for large teams and enterprises",
       features: [
-        "无限博客生成",
-        "私有化部署",
-        "定制AI模型训练",
-        "专属客户经理",
-        "API接口访问",
-        "团队协作功能",
-        "高级数据分析"
+        "Unlimited blog generation",
+        "Private deployment",
+        "Custom AI model training",
+        "Dedicated account manager",
+        "API access",
+        "Team collaboration features",
+        "Advanced analytics"
       ],
-      cta: "联系销售",
+      cta: "Contact Sales",
       popular: false
     }
   ]
@@ -149,72 +151,70 @@ export default function LandingPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* 导航栏 - 21st.dev风格 */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-2xl border-b border-gray-100">
-        <div className="max-w-6xl mx-auto px-6 py-5">
+    <AuroraBackground className="min-h-screen" showRadialGradient={true}>
+      {/* 导航栏 - Aurora风格 */}
+      <nav className="fixed top-0 left-0 right-0 z-[100] bg-black/20 backdrop-blur-2xl border-b border-white/20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-5">
           <div className="flex items-center justify-between">
             {/* Logo */}
             <motion.div
-              className="flex items-center space-x-3"
+              className="flex items-center space-x-2 sm:space-x-3"
               whileHover={{ scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <div className="w-10 h-10 bg-black rounded flex items-center justify-center">
-                <Bot size={22} className="text-white" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white/20 backdrop-blur-md border border-white/30 rounded flex items-center justify-center">
+                <Bot size={18} className="sm:w-[22px] sm:h-[22px] text-white" />
               </div>
-              <h1 className="text-xl font-bold text-black">BlogBuilder</h1>
+              <h1 className="text-lg sm:text-xl font-bold text-white">BlogBuilder</h1>
             </motion.div>
 
             {/* 桌面导航 */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#features" className="text-gray-600 hover:text-black transition-colors font-medium">功能</a>
-              <a href="#pricing" className="text-gray-600 hover:text-black transition-colors font-medium">定价</a>
-              <a href="#testimonials" className="text-gray-600 hover:text-black transition-colors font-medium">评价</a>
-              <a href="#faq" className="text-gray-600 hover:text-black transition-colors font-medium">帮助</a>
+            <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+              <a href="#features" className="text-white hover:text-white/80 transition-colors font-medium text-sm lg:text-base drop-shadow-lg">Features</a>
+              <a href="#pricing" className="text-white hover:text-white/80 transition-colors font-medium text-sm lg:text-base drop-shadow-lg">Pricing</a>
+              <a href="#templates" className="text-white hover:text-white/80 transition-colors font-medium text-sm lg:text-base drop-shadow-lg">Templates</a>
             </div>
 
             {/* CTA按钮 */}
             <div className="hidden md:flex items-center space-x-3">
-              <button 
-                onClick={() => navigate('/ai')} 
-                className="px-6 py-2.5 bg-black text-white rounded font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-sm"
-              >
-                开始使用
-              </button>
+                <button 
+                  onClick={() => navigate('/ai-build-blog-web/ai')} 
+                  className="bg-white text-black rounded-full px-4 sm:px-6 py-2 font-medium text-sm transition-all duration-300 hover:bg-white/90 drop-shadow-lg"
+                >
+                  Get Started
+                </button>
             </div>
 
             {/* 移动端菜单按钮 */}
             <button
-              className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors"
+              className="md:hidden p-2 rounded-xl hover:bg-white/10 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={20} className="text-white" /> : <Menu size={20} className="text-white" />}
             </button>
           </div>
 
           {/* 移动端菜单 */}
           {mobileMenuOpen && (
             <motion.div
-              className="md:hidden mt-4 py-4 border-t border-gray-200"
+              className="md:hidden mt-4 py-4 border-t border-white/10"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
             >
               <div className="flex flex-col space-y-4">
-                <a href="#features" className="text-gray-600 hover:text-gray-900">功能特性</a>
-                <a href="#pricing" className="text-gray-600 hover:text-gray-900">定价方案</a>
-                <a href="#testimonials" className="text-gray-600 hover:text-gray-900">用户评价</a>
-                <a href="#faq" className="text-gray-600 hover:text-gray-900">常见问题</a>
+                <a href="#features" className="text-white hover:text-white/80 text-sm drop-shadow-lg">Features</a>
+                <a href="#pricing" className="text-white hover:text-white/80 text-sm drop-shadow-lg">Pricing</a>
+                <a href="#templates" className="text-white hover:text-white/80 text-sm drop-shadow-lg">Templates</a>
                 <button 
-                  onClick={() => navigate('/ai')} 
-                  className="text-gray-600 hover:text-gray-900 text-left"
+                  onClick={() => navigate('/ai-build-blog-web/ai')} 
+                  className="text-white hover:text-white/80 text-left text-sm drop-shadow-lg"
                 >
-                  开始使用
+                  Get Started
                 </button>
-                <div className="flex space-x-4 pt-4">
-                  <Button variant="ghost" size="sm" fullWidth>登录</Button>
-                  <Button variant="primary" size="sm" fullWidth>免费试用</Button>
+                <div className="flex space-x-3 pt-4">
+                  <button className="flex-1 px-4 py-2 bg-transparent border border-white text-white rounded-xl text-sm drop-shadow-lg">Login</button>
+                  <button className="flex-1 px-4 py-2 bg-white text-black rounded-xl text-sm drop-shadow-lg">Free Trial</button>
                 </div>
               </div>
             </motion.div>
@@ -222,113 +222,91 @@ export default function LandingPage() {
         </div>
       </nav>
 
-      {/* Hero区域 - 21st.dev风格 */}
-      <section className="pt-24 pb-32 px-6 relative overflow-hidden">
-        {/* 背景装饰 */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-teal-400/10 to-cyan-400/10 rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 40 }}
+      {/* Hero区域 - Aurora背景风格 */}
+      <section className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 pt-24">
+        <motion.div
+          className="text-center max-w-7xl mx-auto w-full"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+            {/* 主标题 - 响应式设计 */}
+            <motion.h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-center mb-6 sm:mb-8 leading-tight"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, ease: "easeOut" }}
+              transition={{ delay: 0.3, duration: 0.8 }}
             >
-              {/* 徽章 */}
-              <motion.div
-                className="inline-flex items-center px-6 py-3 bg-black/5 backdrop-blur-sm border border-black/10 rounded-full text-sm font-medium mb-12"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-              >
-                <div className="w-2 h-2 bg-green-500 rounded-full mr-3 animate-pulse"></div>
-                <span className="text-gray-700">AI驱动的博客创作平台</span>
-              </motion.div>
-              
-              {/* 主标题 - 大胆排版 */}
-              <motion.h1
-                className="text-6xl md:text-8xl font-black text-black mb-8 leading-[0.9] tracking-tight"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
-              >
-                <span className="block">创建</span>
-                <span className="block bg-gradient-to-r from-black via-gray-800 to-black bg-clip-text text-transparent">
-                  完美博客
-                </span>
-                <span className="block text-4xl md:text-5xl font-light text-gray-500 mt-4">
-                  只需几秒钟
-                </span>
-              </motion.h1>
-              
-              {/* 副标题 - 简洁描述 */}
-              <motion.p
-                className="text-lg md:text-xl text-gray-600 mb-16 max-w-2xl mx-auto leading-relaxed font-light"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5, duration: 0.8 }}
-              >
-                描述你的想法，AI为你生成完整的博客内容。从标题到正文，从排版到发布，一切都在瞬间完成。
-              </motion.p>
-              
-              {/* CTA按钮 - 扁平设计 */}
-              <motion.div
-                className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7, duration: 0.8 }}
-              >
-                <motion.button
-                  onClick={() => navigate('/templates')}
-                  className="px-8 py-4 bg-black text-white rounded font-medium text-lg transition-all duration-300 hover:shadow-sm flex items-center space-x-2"
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span>浏览模板</span>
-                  <ArrowRight className="w-5 h-5" />
-                </motion.button>
-                
-                <motion.button
-                  className="px-8 py-4 border border-gray-300 text-gray-700 rounded font-medium text-lg transition-all duration-300 hover:shadow-sm flex items-center space-x-2"
-                  whileHover={{ y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Play className="w-5 h-5" />
-                  <span>观看演示</span>
-                </motion.button>
-              </motion.div>
-              
-              {/* 信任指标 - 极简设计 */}
-              <motion.div
-                className="flex items-center justify-center space-x-12 text-sm text-gray-400"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.9, duration: 0.8 }}
-              >
-                <div className="flex items-center">
-                  <div className="w-1 h-1 bg-gray-400 rounded-full mr-2"></div>
-                  免费开始
-                </div>
-                <div className="flex items-center">
-                  <div className="w-1 h-1 bg-gray-400 rounded-full mr-2"></div>
-                  无需注册
-                </div>
-                <div className="flex items-center">
-                  <div className="w-1 h-1 bg-gray-400 rounded-full mr-2"></div>
-                  即时生成
-                </div>
-              </motion.div>
+              <span className="block text-black drop-shadow-lg">Create Perfect Blogs</span>
+              <span className="block text-black drop-shadow-lg">
+                In Seconds
+              </span>
+            </motion.h1>
+            
+            {/* 副标题 - 响应式设计 */}
+            <motion.div
+              className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-black/80 py-4 mb-12 sm:mb-16 max-w-4xl mx-auto leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            >
+              <p className="drop-shadow-lg mb-2 sm:mb-4 font-medium">Describe your ideas, AI generates complete blog content.</p>
+              <p className="drop-shadow-lg font-medium">From title to content, from layout to publish, everything happens in seconds.</p>
             </motion.div>
-          </div>
-        </div>
-      </section>
+            
+            {/* CTA按钮 - 响应式设计 */}
+            <motion.div
+              className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.8 }}
+            >
+              <motion.button
+                onClick={() => navigate('/ai-build-blog-web/templates')}
+                className="w-full sm:w-auto bg-white text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg transition-all duration-300 hover:bg-white/90 drop-shadow-lg flex items-center justify-center space-x-2"
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <span>Browse Templates</span>
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
+              </motion.button>
+              
+              <motion.button
+                className="w-full sm:w-auto bg-transparent border-2 border-black text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg transition-all duration-300 hover:bg-black hover:text-white drop-shadow-lg flex items-center justify-center space-x-2"
+                whileHover={{ y: -2, scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Play className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span>Watch Demo</span>
+              </motion.button>
+            </motion.div>
+            
+            {/* 信任指标 - 响应式设计 */}
+            <motion.div
+              className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8 lg:space-x-12 text-xs sm:text-sm text-black/70"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9, duration: 0.8 }}
+            >
+              <div className="flex items-center">
+                <div className="w-1 h-1 bg-black/70 rounded-full mr-2"></div>
+                Free to Start
+              </div>
+              <div className="flex items-center">
+                <div className="w-1 h-1 bg-black/70 rounded-full mr-2"></div>
+                No Registration
+              </div>
+              <div className="flex items-center">
+                <div className="w-1 h-1 bg-black/70 rounded-full mr-2"></div>
+                Instant Generation
+              </div>
+            </motion.div>
+          </motion.div>
+        </section>
 
-      {/* 产品演示区域 - 21st.dev风格 */}
-      <section className="py-32 px-6 bg-gray-50">
-        <div className="max-w-6xl mx-auto">
+      {/* 产品演示区域 - Aurora风格 */}
+      <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-0 bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-20"
             initial={{ opacity: 0, y: 30 }}
@@ -336,32 +314,33 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl font-black text-black mb-6 leading-tight">
-              简单三步
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white text-center mb-6">
+              Simple Three Steps
             </h2>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light">
-              无需复杂操作，只需描述你的需求，AI为你生成完整的博客内容
-            </p>
+            <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-white/80 py-4 max-w-4xl mx-auto">
+              <p className="mb-2 sm:mb-4">No complex operations needed, just describe your requirements</p>
+              <p>AI generates complete blog content for you</p>
+            </div>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
             {[
               {
                 step: "01",
-                title: "描述需求",
-                description: "简单描述你想要创建的博客主题和风格",
+                title: "Describe Requirements",
+                description: "Simply describe the blog topic and style you want to create",
                 icon: <FileText className="w-8 h-8" />
               },
               {
                 step: "02", 
-                title: "AI生成",
-                description: "我们的AI将为你生成完整的博客内容",
+                title: "AI Generation",
+                description: "Our AI will generate complete blog content for you",
                 icon: <Bot className="w-8 h-8" />
               },
               {
                 step: "03",
-                title: "一键部署",
-                description: "选择模板并一键下载，快速上线",
+                title: "One-Click Deploy",
+                description: "Choose template and download with one click, go live quickly",
                 icon: <Download className="w-8 h-8" />
               }
             ].map((item, index) => (
@@ -375,20 +354,20 @@ export default function LandingPage() {
               >
                 <div className="relative">
                   {/* 步骤编号 */}
-                  <div className="text-6xl font-black text-gray-200 mb-4 group-hover:text-gray-300 transition-colors">
+                  <div className="text-6xl font-black text-white/20 mb-4 group-hover:text-white/30 transition-colors">
                     {item.step}
                   </div>
                   
                   {/* 图标 */}
-                  <div className="w-20 h-20 bg-black rounded-3xl flex items-center justify-center text-white mx-auto mb-8 group-hover:scale-110 transition-transform duration-300">
+                  <div className="w-20 h-20 bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl flex items-center justify-center text-white mx-auto mb-8 group-hover:scale-110 transition-transform duration-300">
                     {item.icon}
                   </div>
                   
                   {/* 内容 */}
-                  <h3 className="text-2xl font-bold text-black mb-4 group-hover:text-gray-700 transition-colors">
+                  <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-white/90 transition-colors">
                     {item.title}
                   </h3>
-                  <p className="text-gray-600 font-light leading-relaxed">
+                  <p className="text-white/70 font-light leading-relaxed">
                     {item.description}
                   </p>
                 </div>
@@ -398,9 +377,9 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 功能特性区域 - 21st.dev风格 */}
-      <section id="features" className="py-32 px-6 bg-white">
-        <div className="max-w-6xl mx-auto">
+      {/* 功能特性区域 - Aurora风格 */}
+      <section id="features" className="relative z-10 py-16 sm:py-24 lg:py-32 px-0 bg-gradient-to-b from-slate-800 via-slate-700 to-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-20"
             initial={{ opacity: 0, y: 30 }}
@@ -408,12 +387,12 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl font-black text-black mb-6 leading-tight">
-              为什么选择我们
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white text-center mb-6">
+              Why Choose Us
             </h2>
-            <p className="text-xl text-gray-500 max-w-2xl mx-auto font-light">
-              不仅仅是AI工具，更是你的创作伙伴
-            </p>
+            <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-white/80 py-4 max-w-4xl mx-auto">
+              <p>Not just an AI tool, but your creative partner</p>
+            </div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -426,17 +405,17 @@ export default function LandingPage() {
                 transition={{ duration: 0.8, delay: index * 0.1 }}
                 viewport={{ once: true }}
               >
-                <div className="p-6 bg-white rounded shadow transition-all duration-300 group-hover:shadow-sm">
+                <div className="p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl transition-all duration-300 group-hover:bg-white/10 group-hover:border-white/20">
                   {/* 图标 */}
-                  <div className="w-12 h-12 bg-black rounded flex items-center justify-center text-white mb-4">
+                  <div className="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl flex items-center justify-center text-white mb-4">
                     {feature.icon}
                   </div>
                   
                   {/* 内容 */}
-                  <h3 className="text-xl font-bold text-black mb-3">
+                  <h3 className="text-xl font-bold text-white mb-3">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-white/70 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -446,61 +425,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* 用户评价区域 */}
-      <section id="testimonials" className="py-20 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              用户真实评价
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              已有超过10,000+用户选择Blog Builder，看看他们怎么说
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
-              >
-                <div className="p-6 bg-white rounded shadow">
-                  <div className="flex items-center mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                    ))}
-                  </div>
-                  <p className="text-gray-600 mb-6 italic">"{testimonial.content}"</p>
-                  <div className="flex items-center">
-                    <img
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      className="w-12 h-12 rounded-full mr-4"
-                    />
-                    <div>
-                      <div className="font-semibold text-gray-900">{testimonial.name}</div>
-                      <div className="text-sm text-gray-500">{testimonial.role}</div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* 定价方案区域 */}
-      <section id="pricing" className="py-20 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section id="pricing" className="relative z-10 py-16 sm:py-20 lg:py-24 px-0 bg-gradient-to-b from-slate-600 via-slate-500 to-slate-600">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 30 }}
@@ -508,12 +436,12 @@ export default function LandingPage() {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              选择适合您的方案
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white text-center mb-6">
+              Choose Your Plan
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              从免费版到企业版，满足不同规模用户的需求
-            </p>
+            <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-white/80 py-4 max-w-4xl mx-auto">
+              <p>From free to enterprise, meet the needs of users of different scales</p>
+            </div>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -527,36 +455,36 @@ export default function LandingPage() {
                 className="relative"
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                    <div className="bg-black text-white px-4 py-1 rounded text-sm font-medium">
-                      最受欢迎
+                    <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                      <div className="bg-white/20 backdrop-blur-md border border-white/30 text-white px-4 py-1 rounded-xl text-sm font-medium">
+                        Most Popular
+                      </div>
                     </div>
-                  </div>
                 )}
-                <div className={`p-6 bg-white rounded shadow h-full ${plan.popular ? 'ring-2 ring-black' : ''}`}>
+                <div className={`p-6 bg-white/5 backdrop-blur-md border border-white/10 rounded-xl h-full transition-all duration-300 ${plan.popular ? 'ring-2 ring-white/30 bg-white/10' : ''}`}>
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                    <p className="text-gray-600 mb-4">{plan.description}</p>
+                    <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
+                    <p className="text-white/70 mb-4">{plan.description}</p>
                     <div className="flex items-baseline justify-center">
-                      <span className="text-5xl font-bold text-gray-900">{plan.price}</span>
-                      <span className="text-gray-600 ml-1">{plan.period}</span>
+                      <span className="text-5xl font-bold text-white">{plan.price}</span>
+                      <span className="text-white/70 ml-1">{plan.period}</span>
                     </div>
                   </div>
                   
                   <ul className="space-y-4 mb-8">
                     {plan.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-center">
-                        <Check className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
-                        <span className="text-gray-600">{feature}</span>
+                        <Check className="w-5 h-5 text-emerald-400 mr-3 flex-shrink-0" />
+                        <span className="text-white/80">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   
                   <button
-                    className={`w-full px-6 py-3 rounded font-medium text-lg transition-all duration-300 hover:shadow-sm ${
+                    className={`w-full px-6 py-3 rounded-xl font-medium text-lg transition-all duration-300 ${
                       plan.popular 
-                        ? 'bg-black text-white' 
-                        : 'border border-gray-300 text-gray-700 hover:border-gray-400'
+                        ? 'bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30' 
+                        : 'bg-transparent border border-white/30 text-white hover:bg-white/10 hover:border-white/40'
                     }`}
                   >
                     {plan.cta}
@@ -568,130 +496,177 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* FAQ区域 */}
-      <section id="faq" className="py-20 px-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            className="text-center mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              常见问题
-            </h2>
-            <p className="text-xl text-gray-600">
-              解答您关于Blog Builder的疑问
-            </p>
-          </motion.div>
 
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="p-6 bg-white rounded shadow">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-3">{faq.question}</h3>
-                  <p className="text-gray-600">{faq.answer}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+      {/* CTA区域 - 带模板展示 */}
+      <section className="relative z-10 py-16 sm:py-24 lg:py-32 px-0 bg-gradient-to-b from-slate-400 via-slate-300 to-slate-400 overflow-hidden">
+        {/* 背景装饰 */}
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-400/10 to-purple-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-teal-400/10 to-cyan-400/10 rounded-full blur-3xl"></div>
         </div>
-      </section>
-
-      {/* CTA区域 */}
-      <section className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
+            className="text-center mb-20"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              准备开始您的AI内容创作之旅？
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white text-center mb-6">
+              Ready to Start Your AI Content Creation Journey?
             </h2>
-            <p className="text-xl text-gray-600 mb-8">
-              立即注册，体验AI驱动的博客生成工具
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <div className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-white/80 py-4 mb-12 max-w-4xl mx-auto">
+              <p className="mb-2 sm:mb-4">Experience AI-powered blog generation tools immediately</p>
+              <p>From idea to publish in just minutes</p>
+            </div>
+            
+            {/* CTA按钮 */}
+            <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-16 sm:mb-20">
               <motion.button
-                onClick={() => navigate('/ai')}
-                className="px-8 py-4 bg-black text-white rounded font-medium text-lg transition-all duration-300 hover:shadow-sm flex items-center space-x-2"
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
+                onClick={() => navigate('/ai-build-blog-web/ai')}
+                className="w-full sm:w-auto bg-white text-black rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg lg:text-xl transition-all duration-300 hover:bg-white/90 drop-shadow-lg flex items-center justify-center space-x-2 sm:space-x-3"
+                whileHover={{ y: -3, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <span>免费开始使用</span>
-                <ArrowRight size={20} />
+                <span>Start Free</span>
+                <ArrowRight size={20} className="sm:w-6 sm:h-6" />
               </motion.button>
               <motion.button
-                className="px-8 py-4 border border-gray-300 text-gray-700 rounded font-medium text-lg transition-all duration-300 hover:shadow-sm"
-                whileHover={{ y: -1 }}
-                whileTap={{ scale: 0.98 }}
+                onClick={() => navigate('/ai-build-blog-web/templates')}
+                className="w-full sm:w-auto bg-transparent border-2 border-white text-white rounded-full px-6 sm:px-8 py-3 sm:py-4 font-medium text-base sm:text-lg lg:text-xl transition-all duration-300 hover:bg-white hover:text-black drop-shadow-lg"
+                whileHover={{ y: -3, scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                联系销售
+                Browse Templates
               </motion.button>
             </div>
           </motion.div>
+
+          {/* 模板展示区域 */}
+          <div className="relative">
+            <h3 className="text-3xl font-bold text-white text-center mb-12">
+              Choose Your Favorite Template Style
+            </h3>
+            
+            {/* 从右到左滚动的模板卡片 */}
+            <div className="relative overflow-hidden">
+              <motion.div
+                className="flex space-x-8"
+                animate={{
+                  x: [0, -100 * blogTemplates.length]
+                }}
+                transition={{
+                  duration: 30,
+                  repeat: Infinity,
+                  ease: "linear"
+                }}
+              >
+                {[...blogTemplates, ...blogTemplates].map((template, index) => (
+                  <motion.div
+                    key={`${template.id}-${index}`}
+                    className="flex-shrink-0 w-80"
+                    whileHover={{ y: -10, scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 h-96 flex flex-col">
+                      {/* 模板预览 */}
+                      <div className="flex-1 bg-white/5 rounded-xl mb-4 overflow-hidden">
+                        <div 
+                          className="w-full h-full bg-gradient-to-br"
+                          style={{
+                            background: `linear-gradient(135deg, ${template.style.colors.primary}20, ${template.style.colors.secondary}20)`
+                          }}
+                        >
+                          <div className="p-4 h-full flex flex-col justify-between">
+                            <div className="space-y-2">
+                              <div className="h-3 bg-white/30 rounded w-3/4"></div>
+                              <div className="h-2 bg-white/20 rounded w-1/2"></div>
+                              <div className="h-2 bg-white/20 rounded w-2/3"></div>
+                            </div>
+                            <div className="space-y-2">
+                              <div className="h-2 bg-white/20 rounded w-full"></div>
+                              <div className="h-2 bg-white/20 rounded w-3/4"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* 模板信息 */}
+                      <div className="space-y-3">
+                        <h4 className="text-white font-bold text-lg">{template.name}</h4>
+                        <p className="text-white/80 text-sm line-clamp-2">{template.description}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {template.tags.slice(0, 3).map((tag, tagIndex) => (
+                            <span
+                              key={tagIndex}
+                              className="px-2 py-1 bg-white/20 text-white/90 text-xs rounded-full"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
+            
+          </div>
         </div>
       </section>
 
       {/* 页脚 */}
-      <footer className="bg-gray-900 text-white py-16 px-6">
-        <div className="max-w-7xl mx-auto">
+      <footer className="relative z-10 bg-gradient-to-b from-slate-300 via-slate-200 to-slate-300 text-slate-800 py-12 sm:py-16 px-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg flex items-center justify-center">
+                <div className="w-8 h-8 bg-gradient-to-r from-slate-600 to-slate-700 rounded-lg flex items-center justify-center">
                   <Bot size={20} className="text-white" />
                 </div>
-                <h3 className="text-xl font-bold">Blog Builder</h3>
+                <h3 className="text-xl font-bold text-slate-800">Blog Builder</h3>
               </div>
-              <p className="text-gray-400 mb-6 max-w-md">
-                基于先进AI技术的内容创作平台，让每个人都能轻松创建高质量的博客内容。
+              <p className="text-slate-600 mb-6 max-w-md">
+                AI-powered content creation platform that makes it easy for everyone to create high-quality blog content.
               </p>
               <div className="flex space-x-4">
-                <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors cursor-pointer">
-                  <Users size={20} />
+                <div className="w-10 h-10 bg-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer">
+                  <Users size={20} className="text-white" />
                 </div>
-                <div className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-gray-700 transition-colors cursor-pointer">
-                  <Globe size={20} />
+                <div className="w-10 h-10 bg-slate-600 rounded-lg flex items-center justify-center hover:bg-slate-700 transition-colors cursor-pointer">
+                  <Globe size={20} className="text-white" />
                 </div>
               </div>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">产品</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">功能特性</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">定价方案</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">API文档</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">更新日志</a></li>
+              <h4 className="font-semibold mb-4 text-slate-800">Product</h4>
+              <ul className="space-y-2 text-slate-600">
+                <li><a href="#" className="hover:text-slate-800 transition-colors">Features</a></li>
+                <li><a href="#" className="hover:text-slate-800 transition-colors">Pricing</a></li>
+                <li><a href="#" className="hover:text-slate-800 transition-colors">API Docs</a></li>
+                <li><a href="#" className="hover:text-slate-800 transition-colors">Changelog</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-semibold mb-4">支持</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li><a href="#" className="hover:text-white transition-colors">帮助中心</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">联系我们</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">隐私政策</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">服务条款</a></li>
+              <h4 className="font-semibold mb-4 text-slate-800">Support</h4>
+              <ul className="space-y-2 text-slate-600">
+                <li><a href="#" className="hover:text-slate-800 transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-slate-800 transition-colors">Contact Us</a></li>
+                <li><a href="#" className="hover:text-slate-800 transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-slate-800 transition-colors">Terms of Service</a></li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+          <div className="border-t border-slate-400 mt-12 pt-8 text-center text-slate-600">
             <p>&copy; 2024 Blog Builder. All rights reserved.</p>
           </div>
         </div>
       </footer>
-    </div>
+    </AuroraBackground>
   )
 }
