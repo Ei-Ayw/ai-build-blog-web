@@ -1,19 +1,19 @@
 import React from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Bot, Sparkles, Zap } from 'lucide-react'
+import { Bot, Sparkles, Zap, FileText } from 'lucide-react'
 import TemplatesPage from './pages/TemplatesPage'
 import OneSentencePage from './pages/OneSentencePage'
 import EnhancedBlogGenerator from './components/EnhancedBlogGenerator'
-import AIBlogGenerator from './components/21st/AIBlogGenerator'
-import AnimatedBackground from './components/21st/AnimatedBackground'
-import Button from './components/21st/Button'
-import './styles/21st-theme.css'
+import AIBlogGenerator from './components/saas/AIBlogGenerator'
+import AbstractBackground from './components/saas/AbstractBackground'
+import Button from './components/saas/Button'
+import './styles/saas-theme.css'
 
 const navigationItems = [
   { 
     key: '/', 
-    icon: <Sparkles size={18} />, 
+    icon: <FileText size={18} />, 
     label: '模板生成',
     path: '/'
   },
@@ -31,8 +31,8 @@ const navigationItems = [
   },
   { 
     key: '/ai', 
-    icon: <Bot size={18} />, 
-    label: '21st风格AI',
+    icon: <Sparkles size={18} />, 
+    label: '现代AI生成',
     path: '/ai'
   }
 ]
@@ -43,12 +43,12 @@ export default function App() {
   const currentPath = location.pathname
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <AnimatedBackground />
+    <div className="min-h-screen bg-white">
+      <AbstractBackground />
       
       {/* 导航栏 */}
       <motion.nav
-        className="relative z-10 border-b border-gray-700 bg-gray-900/80 backdrop-blur-xl"
+        className="relative z-10 border-b border-gray-200 bg-white/80 backdrop-blur-xl"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -61,16 +61,16 @@ export default function App() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-teal-500 to-teal-600 rounded-lg flex items-center justify-center shadow-sm">
                 <Bot size={20} className="text-white" />
               </div>
-              <h1 className="text-xl font-bold bg-gradient-to-r from-purple-400 to-blue-400 bg-clip-text text-transparent">
+              <h1 className="text-xl font-bold text-gray-900">
                 Blog Builder
               </h1>
             </motion.div>
 
             {/* 导航菜单 */}
-            <div className="flex space-x-1">
+            <div className="flex space-x-2">
               {navigationItems.map((item) => (
                 <Button
                   key={item.key}
@@ -78,7 +78,6 @@ export default function App() {
                   size="sm"
                   onClick={() => navigate(item.path)}
                   icon={item.icon}
-                  className={currentPath === item.path ? 'bg-gradient-to-r from-purple-500 to-blue-500' : ''}
                 >
                   {item.label}
                 </Button>
