@@ -212,29 +212,31 @@ const TemplateGallery: React.FC = () => {
 
                   {/* 操作按钮 */}
                   <div className="flex space-x-2">
-                    <Button21
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        handlePreviewTemplate(template)
-                      }}
-                      variant="ghost"
-                      size="sm"
-                      className="flex-1"
-                      icon={<Eye size={12} />}
-                    >
-                      预览
-                    </Button21>
-                    <Button21
-                      onClick={(e) => {
-                        e.stopPropagation()
-                        handleTemplateSelect(template)
-                      }}
-                      size="sm"
-                      className="flex-1"
-                      icon={<ArrowRight size={12} />}
-                    >
-                      使用
-                    </Button21>
+                    <div onClick={(e) => e.stopPropagation()} className="flex-1">
+                      <Button21
+                        onClick={() => {
+                          handlePreviewTemplate(template)
+                        }}
+                        variant="ghost"
+                        size="sm"
+                        className="w-full"
+                        icon={<Eye size={12} />}
+                      >
+                        预览
+                      </Button21>
+                    </div>
+                    <div onClick={(e) => e.stopPropagation()} className="flex-1">
+                      <Button21
+                        onClick={() => {
+                          handleTemplateSelect(template)
+                        }}
+                        size="sm"
+                        className="w-full"
+                        icon={<ArrowRight size={12} />}
+                      >
+                        使用
+                      </Button21>
+                    </div>
                   </div>
                 </div>
               </div>
