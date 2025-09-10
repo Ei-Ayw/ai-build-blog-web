@@ -282,12 +282,12 @@ export default function LandingPage() {
                 transition={{ delay: 0.7, duration: 0.8 }}
               >
                 <motion.button
-                  onClick={() => navigate('/ai')}
+                  onClick={() => navigate('/templates')}
                   className="px-8 py-4 bg-black text-white rounded-2xl font-medium text-lg transition-all duration-300 hover:shadow-lg flex items-center space-x-2"
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
-                  <span>开始创作</span>
+                  <span>浏览模板</span>
                   <ArrowRight className="w-5 h-5" />
                 </motion.button>
                 

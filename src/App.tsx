@@ -1,10 +1,11 @@
 import React from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Bot, Sparkles, Zap, FileText } from 'lucide-react'
+import { Bot, Sparkles, Zap, FileText, Layout } from 'lucide-react'
 import LandingPage from './pages/LandingPage'
 import TemplatesPage from './pages/TemplatesPage'
 import OneSentencePage from './pages/OneSentencePage'
+import TemplateGallery from './pages/TemplateGallery'
 import EnhancedBlogGenerator from './components/EnhancedBlogGenerator'
 import AIBlogGenerator from './components/saas/AIBlogGenerator'
 import AbstractBackground from './components/saas/AbstractBackground'
@@ -20,8 +21,8 @@ const navigationItems = [
   },
   { 
     key: '/templates', 
-    icon: <FileText size={18} />, 
-    label: '模板生成',
+    icon: <Layout size={18} />, 
+    label: '模板库',
     path: '/templates'
   },
   { 
@@ -111,12 +112,12 @@ export default function App() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <Routes>
-          <Route path="/templates" element={<TemplatesPage />} />
-          <Route path="/one" element={<OneSentencePage />} />
-          <Route path="/enhanced" element={<EnhancedBlogGenerator />} />
-          <Route path="/ai" element={<AIBlogGenerator />} />
-        </Routes>
+                        <Routes>
+                          <Route path="/templates" element={<TemplateGallery />} />
+                          <Route path="/one" element={<OneSentencePage />} />
+                          <Route path="/enhanced" element={<EnhancedBlogGenerator />} />
+                          <Route path="/ai" element={<AIBlogGenerator />} />
+                        </Routes>
       </motion.main>
     </div>
   )

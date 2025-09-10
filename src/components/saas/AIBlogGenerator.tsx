@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import { useLocation } from 'react-router-dom'
 import { 
   Bot, 
   Sparkles, 
@@ -12,13 +13,16 @@ import {
   Wand2,
   Lightbulb,
   ArrowRight,
-  Star
+  Star,
+  Type,
+  Layout
 } from 'lucide-react'
 import Card from './Card'
 import Button from './Button'
 import Input from './Input'
 import Select from './Select'
 import { TencentAIService, type BlogGenerationRequest, type BlogContent } from '../../services/tencentAI'
+import { BlogTemplate } from '../../data/templates'
 
 interface AIBlogGeneratorProps {
   onGenerated?: (content: BlogContent) => void
@@ -26,6 +30,7 @@ interface AIBlogGeneratorProps {
 }
 
 export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGeneratorProps) {
+  const location = useLocation()
   const [formData, setFormData] = useState({
     prompt: '',
     template: 'clean',
@@ -36,6 +41,20 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
   const [generatedContent, setGeneratedContent] = useState<BlogContent | null>(null)
   const [optimizing, setOptimizing] = useState<string | null>(null)
   const [copied, setCopied] = useState(false)
+  const [selectedTemplate, setSelectedTemplate] = useState<BlogTemplate | null>(null)
+
+  // 从路由状态获取选中的模板
+  useEffect(() => {
+    if (location.state?.selectedTemplate) {
+      const template = location.state.selectedTemplate as BlogTemplate
+      setSelectedTemplate(template)
+      setFormData(prev => ({
+        ...prev,
+        template: template.id,
+        style: template.style.layout.type
+      }))
+    }
+  }, [location.state])
 
   const templateOptions = [
     { 
@@ -205,6 +224,58 @@ export default function AIBlogGenerator({ onGenerated, onDownload }: AIBlogGener
                     描述你的想法，AI为你生成完整的博客内容
                   </p>
                 </div>
+
+                {/* 选中的模板信息 */}
+                {selectedTemplate && (
+                  <motion.div
+                    className="p-4 bg-gray-50 rounded-2xl border border-gray-200"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                  >
+                    <div className="flex items-center justify-between mb-3">
+                      <h3 className="text-lg font-bold text-black">已选择模板</h3>
+                      <span className="px-3 py-1 bg-black text-white text-sm rounded-xl">
+                        {selectedTemplate.category}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div
+                        className="w-12 h-12 rounded-2xl flex items-center justify-center text-white text-xl font-bold"
+                        style={{ backgroundColor: selectedTemplate.style.colors.primary }}
+                      >
+                        {selectedTemplate.name.charAt(0)}
+                      </div>
+                      <div className="flex-1">
+                        <h4 className="font-bold text-black">{selectedTemplate.name}</h4>
+                        <p className="text-sm text-gray-600">{selectedTemplate.description}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-6 mt-3 pt-3 border-t border-gray-200">
+                      <div className="flex items-center space-x-2">
+                        <Palette className="w-4 h-4 text-gray-400" />
+                        <div className="flex space-x-1">
+                          <div
+                            className="w-4 h-4 rounded-full"
+                            style={{ backgroundColor: selectedTemplate.style.colors.primary }}
+                          ></div>
+                          <div
+                            className="w-4 h-4 rounded-full"
+                            style={{ backgroundColor: selectedTemplate.style.colors.accent }}
+                          ></div>
+                        </div>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Type className="w-4 h-4 text-gray-400" />
+                        <span className="text-sm text-gray-600">{selectedTemplate.style.typography.heading}</span>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <Layout className="w-4 h-4 text-gray-400" />
+                        <span className="text-sm text-gray-600">{selectedTemplate.style.layout.type}</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
 
                 <Input
                   label="博客需求描述"
