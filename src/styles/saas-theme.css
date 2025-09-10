@@ -142,7 +142,7 @@ body {
   font-weight: var(--font-weight-medium);
   line-height: 1;
   border: 1px solid transparent;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   text-decoration: none;
@@ -160,17 +160,17 @@ body {
 .btn-saas--primary {
   background: var(--gradient-primary);
   color: var(--text-inverse);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 
 .btn-saas--primary:hover {
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
 }
 
 .btn-saas--primary:active {
   transform: translateY(0);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 
 /* 次要按钮 */
@@ -185,7 +185,7 @@ body {
   background: var(--bg-secondary);
   border-color: var(--border-medium);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 
 /* 幽灵按钮 */
@@ -220,15 +220,15 @@ body {
 .card-saas {
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius-md);
+  box-shadow: none;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
 }
 
 .card-saas:hover {
   border-color: var(--border-medium);
-  box-shadow: var(--shadow-md);
+  box-shadow: none;
   transform: translateY(-2px);
 }
 
@@ -237,7 +237,7 @@ body {
   background: var(--bg-overlay);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: var(--shadow-lg);
+  box-shadow: none;
 }
 
 /* 卡片内边距 */
@@ -262,7 +262,7 @@ body {
   color: var(--text-primary);
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
 }
@@ -296,7 +296,7 @@ body {
   color: var(--text-primary);
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   outline: none;
@@ -317,7 +317,7 @@ body {
 .tabs-saas {
   display: flex;
   background: var(--bg-secondary);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-md);
   padding: var(--space-1);
   border: 1px solid var(--border-light);
 }
@@ -345,7 +345,7 @@ body {
 .tab-saas--active {
   background: var(--bg-elevated);
   color: var(--text-primary);
-  box-shadow: var(--shadow-sm);
+  box-shadow: none;
 }
 
 /* 现代SaaS徽章样式 */
@@ -411,8 +411,8 @@ body {
   max-width: 500px;
   background: var(--bg-elevated);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-2xl);
+  border-radius: var(--radius-md);
+  box-shadow: none;
   overflow: hidden;
 }
 

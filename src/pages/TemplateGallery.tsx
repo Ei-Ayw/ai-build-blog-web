@@ -81,7 +81,7 @@ const TemplateGallery: React.FC = () => {
             </div>
             <button
               onClick={() => navigate('/ai')}
-              className="px-6 py-2 bg-black text-white rounded-2xl font-medium hover:shadow-lg transition-all duration-300"
+              className="px-6 py-2 bg-black text-white rounded-md font-medium  transition-all duration-300"
             >
               直接生成
             </button>
@@ -106,7 +106,7 @@ const TemplateGallery: React.FC = () => {
                 placeholder="搜索模板..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
+                className="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
               />
             </div>
 
@@ -114,7 +114,7 @@ const TemplateGallery: React.FC = () => {
             <div className="flex gap-2 overflow-x-auto">
               <button
                 onClick={() => setSelectedCategory('all')}
-                className={`px-4 py-2 rounded-2xl font-medium whitespace-nowrap transition-all duration-300 ${
+                className={`px-4 py-2 rounded-md font-medium whitespace-nowrap transition-all duration-300 ${
                   selectedCategory === 'all'
                     ? 'bg-black text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -126,7 +126,7 @@ const TemplateGallery: React.FC = () => {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-2xl font-medium whitespace-nowrap transition-all duration-300 ${
+                  className={`px-4 py-2 rounded-md font-medium whitespace-nowrap transition-all duration-300 ${
                     selectedCategory === category
                       ? 'bg-black text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -151,7 +151,7 @@ const TemplateGallery: React.FC = () => {
           {filteredTemplates.map((template, index) => (
             <motion.div
               key={template.id}
-              className="group bg-white rounded-2xl shadow hover:shadow-lg transition-all duration-300 overflow-hidden"
+              className="group bg-white rounded-md   transition-all duration-300 overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -162,7 +162,7 @@ const TemplateGallery: React.FC = () => {
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
                     <div 
-                      className="w-16 h-16 rounded-2xl mx-auto mb-2 flex items-center justify-center text-white text-2xl font-bold"
+                      className="w-16 h-16 rounded-md mx-auto mb-2 flex items-center justify-center text-white text-2xl font-bold"
                       style={{ backgroundColor: template.style.colors.primary }}
                     >
                       {template.name.charAt(0)}
@@ -176,7 +176,7 @@ const TemplateGallery: React.FC = () => {
                   <div className="flex space-x-2">
                     <motion.button
                       onClick={() => handlePreviewTemplate(template)}
-                      className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-white text-black rounded-2xl font-medium transition-all duration-300"
+                      className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-white text-black rounded-md font-medium transition-all duration-300"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -185,7 +185,7 @@ const TemplateGallery: React.FC = () => {
                     </motion.button>
                     <motion.button
                       onClick={() => handleTemplateSelect(template)}
-                      className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-black text-white rounded-2xl font-medium transition-all duration-300"
+                      className="opacity-0 group-hover:opacity-100 px-4 py-2 bg-black text-white rounded-md font-medium transition-all duration-300"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
@@ -247,7 +247,7 @@ const TemplateGallery: React.FC = () => {
                 {/* 使用按钮 */}
                 <motion.button
                   onClick={() => handleTemplateSelect(template)}
-                  className="w-full px-4 py-3 bg-black text-white rounded-2xl font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
+                  className="w-full px-4 py-3 bg-black text-white rounded-md font-medium  transition-all duration-300 flex items-center justify-center space-x-2"
                   whileHover={{ y: -1 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -277,7 +277,7 @@ const TemplateGallery: React.FC = () => {
                 setSearchTerm('');
                 setSelectedCategory('all');
               }}
-              className="px-6 py-3 bg-black text-white rounded-2xl font-medium hover:shadow-lg transition-all duration-300"
+              className="px-6 py-3 bg-black text-white rounded-md font-medium  transition-all duration-300"
             >
               重置筛选
             </button>
