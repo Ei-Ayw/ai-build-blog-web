@@ -49,6 +49,11 @@ export default function App() {
   const navigate = useNavigate()
   const currentPath = location.pathname
 
+  // 如果是首页，直接显示Landing Page
+  if (currentPath === '/') {
+    return <LandingPage />
+  }
+
   return (
     <div className="min-h-screen bg-white">
       <AbstractBackground />
@@ -102,7 +107,6 @@ export default function App() {
         transition={{ duration: 0.6, delay: 0.2 }}
       >
         <Routes>
-          <Route path="/" element={<LandingPage />} />
           <Route path="/templates" element={<TemplatesPage />} />
           <Route path="/one" element={<OneSentencePage />} />
           <Route path="/enhanced" element={<EnhancedBlogGenerator />} />
