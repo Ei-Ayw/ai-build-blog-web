@@ -12,6 +12,21 @@ body {
 
 @layer base {
   :root { 
+    /* Design System Color Hierarchy - Light Theme */
+    --bg-1: 0 0% 100%;        /* Page background */
+    --bg-2: 0 0% 98%;         /* Group/tag background */
+    --bg-3: 0 0% 96%;         /* Card background */
+    --bg-4: 0 0% 94%;         /* Modal background */
+    --text-1: 0 0% 9%;        /* Primary text */
+    --text-2: 0 0% 25%;       /* Secondary text */
+    --text-3: 0 0% 45%;       /* Tertiary text */
+    --text-4: 0 0% 65%;       /* Quaternary text */
+    /* Semantic colors */
+    --positive: 142 76% 36%;  /* Success green */
+    --negative: 0 84% 60%;    /* Error red */
+    --warning: 38 92% 50%;    /* Warning orange */
+    --info: 199 89% 48%;      /* Info blue */
+    /* Legacy shadcn colors */
     --background: 0 0% 100%; 
     --foreground: 0 0% 3.9%; 
     --card: 0 0% 100%; 
@@ -49,6 +64,21 @@ body {
     --blue-400: #60a5fa;
   }
   .dark { 
+    /* Design System Color Hierarchy - Dark Theme */
+    --bg-1: 0 0% 4%;          /* Page background */
+    --bg-2: 0 0% 6%;          /* Group/tag background */
+    --bg-3: 0 0% 8%;          /* Card background */
+    --bg-4: 0 0% 10%;         /* Modal background */
+    --text-1: 0 0% 98%;       /* Primary text */
+    --text-2: 0 0% 85%;       /* Secondary text */
+    --text-3: 0 0% 70%;       /* Tertiary text */
+    --text-4: 0 0% 55%;       /* Quaternary text */
+    /* Semantic colors - adjusted for dark theme */
+    --positive: 142 76% 46%;  /* Success green */
+    --negative: 0 84% 70%;    /* Error red */
+    --warning: 38 92% 60%;    /* Warning orange */
+    --info: 199 89% 58%;      /* Info blue */
+    /* Legacy shadcn colors */
     --background: 0 0% 3.9%; 
     --foreground: 0 0% 98%; 
     --card: 0 0% 3.9%; 
@@ -93,7 +123,40 @@ body {
     @apply bg-background text-foreground; } }
 
 @layer utilities {
-  /* 21st black bordered style tokens */
+  /* Design System - Background Hierarchy */
+  .bg-page { @apply bg-bg-1; }        /* Page background */
+  .bg-group { @apply bg-bg-2; }       /* Group/tag background */
+  .bg-card { @apply bg-bg-3; }        /* Card background */
+  .bg-modal { @apply bg-bg-4; }       /* Modal background */
+  
+  /* Design System - Text Hierarchy */
+  .text-primary { @apply text-text-1; }    /* Primary text */
+  .text-secondary { @apply text-text-2; }  /* Secondary text */
+  .text-tertiary { @apply text-text-3; }   /* Tertiary text */
+  .text-quaternary { @apply text-text-4; } /* Quaternary text */
+  
+  /* Typography Hierarchy */
+  .text-display { @apply text-4xl md:text-5xl font-black text-text-1 tracking-tight; }
+  .text-h1 { @apply text-3xl md:text-4xl font-bold text-text-1 tracking-tight; }
+  .text-h2 { @apply text-2xl md:text-3xl font-semibold text-text-1 tracking-tight; }
+  .text-h3 { @apply text-xl md:text-2xl font-semibold text-text-1; }
+  .text-h4 { @apply text-lg md:text-xl font-medium text-text-1; }
+  .text-body { @apply text-base text-text-2 leading-relaxed; }
+  .text-caption { @apply text-sm text-text-3; }
+  .text-label { @apply text-xs font-medium text-text-3 uppercase tracking-wide; }
+  
+  /* Semantic Text Colors */
+  .text-positive { color: hsl(var(--positive)); }
+  .text-negative { color: hsl(var(--negative)); }
+  .text-warning { color: hsl(var(--warning)); }
+  .text-info { color: hsl(var(--info)); }
+  
+  /* Card Components */
+  .card-base { @apply bg-bg-3 border border-border/50 rounded-lg shadow-sm; }
+  .card-elevated { @apply bg-bg-3 border border-border/50 rounded-lg shadow-md; }
+  .card-floating { @apply bg-bg-3 border border-border/50 rounded-lg shadow-lg; }
+  
+  /* 21st black bordered style tokens (legacy) */
   .card-21st { @apply bg-white border border-slate-200 rounded-xl shadow-sm; }
   .card-glass { @apply bg-white/70 backdrop-blur-xl border border-slate-200 rounded-xl shadow-sm; }
   .btn-21st { @apply bg-black text-white rounded-md font-medium inline-flex items-center justify-center; }

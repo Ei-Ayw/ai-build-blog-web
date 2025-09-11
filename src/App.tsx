@@ -1,12 +1,13 @@
 import React from 'react'
 import { Routes, Route, useLocation, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Bot, Sparkles, Zap, FileText, Layout } from 'lucide-react'
+import { Bot, Sparkles, Zap, FileText, Layout, Palette } from 'lucide-react'
 import LandingPage from './pages/LandingPage'
 import TemplatesPage from './pages/TemplatesPage'
 import OneSentencePage from './pages/OneSentencePage'
 import TemplateGallery from './pages/TemplateGallery'
 import HeroParallaxPage from './pages/HeroParallaxPage'
+import DesignSystemDemo from './pages/DesignSystemDemo'
 import EnhancedBlogGenerator from './components/EnhancedBlogGenerator'
 import AIBlogGenerator from './components/saas/AIBlogGenerator'
 import AbstractBackground from './components/saas/AbstractBackground'
@@ -48,6 +49,12 @@ const navigationItems = [
     icon: <Layout size={18} />, 
     label: 'Hero视差',
     path: '/hero'
+  },
+  { 
+    key: '/design-system', 
+    icon: <Palette size={18} />, 
+    label: '设计系统',
+    path: '/design-system'
   }
 ]
 
@@ -127,12 +134,14 @@ export default function App() {
                           <Route path="/enhanced" element={<EnhancedBlogGenerator />} />
                           <Route path="/ai" element={<AIBlogGenerator />} />
                           <Route path="/hero" element={<HeroParallaxPage />} />
+                          <Route path="/design-system" element={<DesignSystemDemo />} />
                           {/* GH Pages base-prefixed routes */}
                           <Route path="/ai-build-blog-web/templates" element={<TemplateGallery />} />
                           <Route path="/ai-build-blog-web/one" element={<OneSentencePage />} />
                           <Route path="/ai-build-blog-web/enhanced" element={<EnhancedBlogGenerator />} />
                           <Route path="/ai-build-blog-web/ai" element={<AIBlogGenerator />} />
                           <Route path="/ai-build-blog-web/hero" element={<HeroParallaxPage />} />
+                          <Route path="/ai-build-blog-web/design-system" element={<DesignSystemDemo />} />
                         </Routes>
       </motion.main>
     </div>

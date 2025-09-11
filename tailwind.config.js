@@ -44,6 +44,21 @@ export default {
   			]
   		},
   		colors: {
+  			// Design System Color Hierarchy
+  			'bg-1': 'hsl(var(--bg-1))',
+  			'bg-2': 'hsl(var(--bg-2))',
+  			'bg-3': 'hsl(var(--bg-3))',
+  			'bg-4': 'hsl(var(--bg-4))',
+  			'text-1': 'hsl(var(--text-1))',
+  			'text-2': 'hsl(var(--text-2))',
+  			'text-3': 'hsl(var(--text-3))',
+  			'text-4': 'hsl(var(--text-4))',
+  			// Semantic colors
+  			'positive': 'hsl(var(--positive))',
+  			'negative': 'hsl(var(--negative))',
+  			'warning': 'hsl(var(--warning))',
+  			'info': 'hsl(var(--info))',
+  			// Accent colors
   			teal: {
   				'50': '#f0fdfa',
   				'100': '#ccfbf1',
